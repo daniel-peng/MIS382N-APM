@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<!-- saved from url=(0106)http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/ -->
+<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" lang="en-US"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to make beautiful data visualizations in Python with matplotlib | Dr. Randal S. Olson</title>
+<script async="" data-rocketsrc="?cf_action=sync_comments&amp;post_id=4882" data-rocketoptimized="true"></script><script id="twitter-wjs" data-rocketsrc="http://platform.twitter.com/widgets.js" data-rocketoptimized="true"></script><script type="text/javascript" async="" src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/ga.js"></script><script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"d61e39467e55744b09beab6d70895940",petok:"a0f385a3b3ee4636613f3c6aefba0e9ee88a4f7b-1476891578-86400",zone:"randalolson.com",rocket:"a",apps:{"abetterbrowser":{"ie":"10","opera":"34","chrome":"40","safari":"7","firefox":"37"},"ga_key":{"ua":"UA-3573562-2","ga_bs":"2"}}}];document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=088620b277/cloudflare.min.js"><'+'\/script>');}}catch(e){};
+//]]>
+</script><script type="text/javascript" src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/cloudflare.min.js"></script><style type="text/css">.cf-hidden { display: none; } .cf-invisible { visibility: hidden; }</style><script data-module="cloudflare/rocket" id="cfjs_block_307d24ea28" onload="CloudFlare.__cfjs_block_307d24ea28_load()" onerror="CloudFlare.__cfjs_block_307d24ea28_error()" onreadystatechange="CloudFlare.__cfjs_block_307d24ea28_readystatechange()" type="text/javascript" src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/rocket.js"></script>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://www.randalolson.com/xmlrpc.php">
+ 
+<meta name="description" content="Randy Olson provides code examples and explanations for a handful of beautiful data visualizations.">
+<meta name="keywords" itemprop="keywords" content="data visualization,tutorial,matplotlib,python,beautiful visualization,graphic design,code example,color palette,visualization,ipython">
+<link rel="canonical" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/">
+ 
+<link rel="dns-prefetch" href="http://s0.wp.com/">
+<link rel="dns-prefetch" href="http://s.gravatar.com/">
+<link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Dr. Randal S. Olson » Feed" href="http://www.randalolson.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Dr. Randal S. Olson » Comments Feed" href="http://www.randalolson.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Dr. Randal S. Olson » How to make beautiful data visualizations in Python with matplotlib Comments Feed" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/feed/">
+<script type="text/rocketscript" data-rocketoptimized="true">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.randalolson.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.6.1"}};
+			!function(a,b,c){function d(a){var c,d,e,f,g,h=b.createElement("canvas"),i=h.getContext&&h.getContext("2d"),j=String.fromCharCode;if(!i||!i.fillText)return!1;switch(i.textBaseline="top",i.font="600 32px Arial",a){case"flag":return i.fillText(j(55356,56806,55356,56826),0,0),!(h.toDataURL().length<3e3)&&(i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,65039,8205,55356,57096),0,0),c=h.toDataURL(),i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,55356,57096),0,0),d=h.toDataURL(),c!==d);case"diversity":return i.fillText(j(55356,57221),0,0),e=i.getImageData(16,16,1,1).data,f=e[0]+","+e[1]+","+e[2]+","+e[3],i.fillText(j(55356,57221,55356,57343),0,0),e=i.getImageData(16,16,1,1).data,g=e[0]+","+e[1]+","+e[2]+","+e[3],f!==g;case"simple":return i.fillText(j(55357,56835),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode8":return i.fillText(j(55356,57135),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode9":return i.fillText(j(55358,56631),0,0),0!==i.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity","unicode9"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel="stylesheet" id="contact-form-7-css" href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="collapseomatic-css-css" href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/light_style.css" type="text/css" media="all">
+<link rel="stylesheet" id="responsive-style-css" href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="responsive-media-queries-css" href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/responsive.css" type="text/css" media="all">
+<link rel="stylesheet" id="social-logos-css" href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/social-logos.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/jetpack.css" type="text/css" media="all">
+ 
+<script type="text/rocketscript" data-rocketoptimized="true">/* CloudFlare analytics upgrade */
+</script>
+ 
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-includes/js/jquery/jquery.js?ver=1.12.4" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-content/themes/responsive/core/js/responsive-modernizr.min.js?ver=2.6.1" data-rocketoptimized="true"></script>
+<link rel="https://api.w.org/" href="http://www.randalolson.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.randalolson.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.randalolson.com/wp-includes/wlwmanifest.xml">
+<link rel="prev" title="Average IQ of students by college major and gender ratio" href="http://www.randalolson.com/2014/06/25/average-iq-of-students-by-college-major-and-gender-ratio/">
+<link rel="next" title="The best and worst times to have your case reviewed by a judge" href="http://www.randalolson.com/2014/08/24/the-best-and-worst-times-to-have-your-case-reviewed-by-a-judge/">
+<meta name="generator" content="WordPress 4.6.1">
+<link rel="shortlink" href="http://www.randalolson.com/?p=4882">
+<link rel="alternate" type="application/json+oembed" href="http://www.randalolson.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.randalolson.com%2F2014%2F06%2F28%2Fhow-to-make-beautiful-data-visualizations-in-python-with-matplotlib%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://www.randalolson.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.randalolson.com%2F2014%2F06%2F28%2Fhow-to-make-beautiful-data-visualizations-in-python-with-matplotlib%2F&amp;format=xml">
+<link href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/SyntaxHighlighter.css" type="text/css" rel="stylesheet">
+<link rel="dns-prefetch" href="http://v0.wordpress.com/">
+ 
+ 
+<style type="text/css">span.oe_textdirection{unicode-bidi:bidi-override;direction:rtl;}span.oe_displaynone{display:none;}</style>
+<style type="text/css">.broken_link,a.broken_link{text-decoration:line-through;}</style>
+ 
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to make beautiful data visualizations in Python with matplotlib">
+<meta property="og:url" content="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/">
+<meta property="og:description" content="Want to learn more about data visualization with Python? Take a look at my Data Visualization Basics with Python video course on O’Reilly. It’s been well over a year since I wrote my la…">
+<meta property="article:published_time" content="2014-06-28T18:13:28+00:00">
+<meta property="article:modified_time" content="2016-03-07T13:28:40+00:00">
+<meta property="og:site_name" content="Dr. Randal S. Olson">
+<meta property="og:image" content="http://www.randalolson.com/wp-content/uploads/data-ink.gif">
+<meta property="og:image:width" content="640">
+<meta property="og:image:height" content="460">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@randal_olson">
+<meta name="twitter:image" content="http://www.randalolson.com/wp-content/uploads/data-ink.gif?w=640">
+<meta name="twitter:card" content="summary_large_image">
+<script type="text/javascript">
+/* <![CDATA[ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-3573562-2']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+(function(b){(function(a){"__CF"in b&&"DJS"in b.__CF?b.__CF.DJS.push(a):"addEventListener"in b?b.addEventListener("load",a,!1):b.attachEvent("onload",a)})(function(){"FB"in b&&"Event"in FB&&"subscribe"in FB.Event&&(FB.Event.subscribe("edge.create",function(a){_gaq.push(["_trackSocial","facebook","like",a])}),FB.Event.subscribe("edge.remove",function(a){_gaq.push(["_trackSocial","facebook","unlike",a])}),FB.Event.subscribe("message.send",function(a){_gaq.push(["_trackSocial","facebook","send",a])}));"twttr"in b&&"events"in twttr&&"bind"in twttr.events&&twttr.events.bind("tweet",function(a){if(a){var b;if(a.target&&a.target.nodeName=="IFRAME")a:{if(a=a.target.src){a=a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);b=0;for(var c;c=a[b];++b)if(c.indexOf("url")===0){b=unescape(c.split("=")[1]);break a}}b=void 0}_gaq.push(["_trackSocial","twitter","tweet",b])}})})})(window);
+/* ]]> */
+</script>
+<script data-rocketsrc="http://www.randalolson.com/wp-includes/js/wp-emoji-release.min.js?ver=4.6.1" data-rocketoptimized="true" type="text/javascript"></script><script type="text/javascript" async="" data-rocketsrc="//randalolson.disqus.com/embed.js" data-rocketoptimized="true"></script><script async="" type="text/javascript" data-rocketsrc="//randalolson.disqus.com/count.js" data-rocketoptimized="true"></script><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/services.css"><style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style><link rel="stylesheet" href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/loading.8023a7350e47171f7bb79707886cd7c5.css"></head>
+<body class="single single-post postid-4882 single-format-standard">
+<div id="container" class="hfeed">
+<div class="skip-container cf">
+<a class="skip-link screen-reader-text focusable" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#content">↓ Skip to Main Content</a>
+</div> 
+<div id="header">
+<div id="logo">
+<a href="http://www.randalolson.com/"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/rso_header.png" width="423" height="75" alt="Dr. Randal S. Olson" scale="0"></a>
+</div> 
+<div class="main-nav"><div id="responsive_current_menu_item">How to make beautiful data visualizations in Python with matplotlib</div><ul class="menu"><li><a href="http://www.randalolson.com/">Home</a></li><li class="page_item page-item-29 page_item_has_children"><a href="http://www.randalolson.com/blog/">Blog</a><ul class="children"><li class="page_item page-item-7886"><a href="http://www.randalolson.com/blog/sponsorship/">Sponsorship</a></li><li class="page_item page-item-7893"><a href="http://www.randalolson.com/blog/support/">Support</a></li></ul></li><li class="page_item page-item-19 page_item_has_children"><a href="http://www.randalolson.com/about/">About</a><ul class="children"><li class="page_item page-item-22"><a href="http://www.randalolson.com/about/research/">Current Research</a></li><li class="page_item page-item-981"><a href="http://www.randalolson.com/about/publications/">Publications</a></li><li class="page_item page-item-1497"><a href="http://www.randalolson.com/about/teaching/">Teaching</a></li><li class="page_item page-item-7897"><a href="http://www.randalolson.com/about/teaching-materials/">Teaching Materials</a></li><li class="page_item page-item-1450"><a href="http://www.randalolson.com/about/mentoring/">Mentoring</a></li><li class="page_item page-item-2099"><a href="http://www.randalolson.com/about/coding/">Coding</a></li><li class="page_item page-item-1882"><a href="http://www.randalolson.com/about/press/">Press</a></li></ul></li><li class="page_item page-item-34"><a href="http://www.randalolson.com/contact/">Contact</a></li></ul>
+<a id="responsive_menu_button"></a></div>
+</div> 
+<div id="wrapper" class="clearfix">
+<div id="content" class="grid col-620">
+<script async="" data-rocketsrc="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5475335462909831" data-ad-slot="4097645704" data-ad-format="auto" data-adsbygoogle-status="done"></ins>
+<script type="text/rocketscript" data-rocketoptimized="true">
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br>
+<div id="post-4882" class="post-4882 post type-post status-publish format-standard has-post-thumbnail hentry category-data-visualization category-ipython category-python category-tutorial tag-graphic-design tag-matplotlib tag-python tag-tutorial tag-visualization">
+<h1 class="entry-title post-title">How to make beautiful data visualizations in Python with matplotlib</h1>
+<div class="post-meta">
+<span class="meta-prep meta-prep-author posted">Posted on </span><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/" title="How to make beautiful data visualizations in Python with matplotlib" rel="bookmark"><time class="timestamp updated" datetime="2014-06-28T14:13:28+00:00">June 28, 2014</time></a><span class="byline"> by </span><span class="author vcard"><a class="url fn n" href="http://www.randalolson.com/author/rhiever/" title="View all posts by Randy Olson">Randy Olson</a></span> </div> 
+<div class="post-entry">
+<a href="https://www.patreon.com/randal_olson"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/patreon_banner.png" width="50%" style="padding-top: 10px;" scale="0"></a>
+<p>Want to learn more about data visualization with Python?</p>
+<p>Take a look at my <a href="http://shop.oreilly.com/product/0636920046592.do" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://shop.oreilly.com/product/0636920046592.do&#39;, &#39;Data Visualization Basics with Python video course&#39;]);">Data Visualization Basics with Python video course</a> on O’Reilly.</p>
+<hr>
+<p>It’s been well over a year since I wrote my last tutorial, so I figure I’m overdue. This time, I’m going to focus on how you can make beautiful data visualizations in Python with <a href="http://matplotlib.org/" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://matplotlib.org&#39;, &#39;matplotlib&#39;]);">matplotlib</a>.</p>
+<p>There are already tons of tutorials on how to make basic plots in matplotlib. There’s even a huge <a href="http://matplotlib.org/gallery.html" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://matplotlib.org/gallery.html&#39;, &#39;example plot gallery&#39;]);">example plot gallery</a> right on the matplotlib web site, so I’m not going to bother covering the basics here. However, one aspect that’s missing in all of these tutorials and examples is how to make a <em>nice-looking</em> plot.</p>
+<p>Below, I’m going to outline the basics of effective graphic design and show you how it’s done in matplotlib. I’ll note that these tips aren’t limited to matplotlib; they apply just as much in R/ggplot2, matlab, Excel, and any other graphing tool you use.</p>
+<h3>Less is more</h3>
+<p>The most important tip to learn here is that <strong>when it comes to plotting, less is more</strong>. Novice graphical designers often make the mistake of thinking that <a href="http://www.cdc.gov/features/dssafeswimmingpool/dssafeswimmingpool_b626px.jpg" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://www.cdc.gov/features/dssafeswimmingpool/dssafeswimmingpool_b626px.jpg&#39;, &#39;adding a cute semi-related picture to the background&#39;]);">adding a cute semi-related picture to the background</a> of a data visualization will make it more visually appealing. (Yes, that graphic was an official release from the CDC.) Or perhaps they’ll fall prey to more subtle graphic design flaws, such as using an excess of <a href="http://en.wikipedia.org/wiki/Chartjunk" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://en.wikipedia.org/wiki/Chartjunk&#39;, &#39;chartjunk&#39;]);">chartjunk</a> that their graphing tool includes by default.</p>
+<p>At the end of the day, <a href="http://darkhorseanalytics.com/blog/data-looks-better-naked/" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://darkhorseanalytics.com/blog/data-looks-better-naked/&#39;, &#39;data looks better naked&#39;]);">data looks better naked</a>. Spend more time stripping your data down than dressing it up. <a href="http://darkhorseanalytics.com/" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://darkhorseanalytics.com/&#39;, &#39;Darkhorse Analytics&#39;]);">Darkhorse Analytics</a> made an excellent GIF to explain the point:</p>
+<p><a href="http://gfycat.com/ImprobableFemaleBasenji" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://gfycat.com/ImprobableFemaleBasenji&#39;, &#39;&#39;]);"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/data-ink.gif" alt="data-ink" class="aligncenter size-full wp-image-4883" scale="0"></a></p>
+<p>(click on the GIF for a gfycat version that allows you to move through it at your own pace)</p>
+<p>Antoine de Saint-Exupery put it best:</p>
+<blockquote><p>Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away.</p></blockquote>
+<p>You’ll see this in the spirit of all of my plots below.</p>
+<h3>Color matters</h3>
+<p>The default color scheme in matplotlib is <a href="http://matplotlib.org/examples/pylab_examples/stackplot_demo.html" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://matplotlib.org/examples/pylab_examples/stackplot_demo.html&#39;, &#39;pretty ugly&#39;]);">pretty ugly</a>. Die-hard matlab/matplotlib fans may stand by their color scheme to the end, but it’s undeniable that <a href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/percent-bachelors-degrees-women-usa.png">Tableau’s default color scheme</a> is orders of magnitude better than matplotlib’s.</p>
+<p>Use established default color schemes from software that is well-known for producing beautiful plots. Tableau has an excellent <a href="http://tableaufriction.blogspot.ro/2012/11/finally-you-can-use-tableau-data-colors.html" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://tableaufriction.blogspot.ro/2012/11/finally-you-can-use-tableau-data-colors.html&#39;, &#39;set of color schemes&#39;]);">set of color schemes</a> to use, ranging from grayscale to colored to color blind-friendly. Which brings me to my next point…</p>
+<p>Many graphic designers completely forget about <a href="http://en.wikipedia.org/wiki/Color_blindness" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://en.wikipedia.org/wiki/Color_blindness&#39;, &#39;color blindness&#39;]);">color blindness</a>, which affects over 5% of the viewers of their graphics. For example, a plot using red and green to differentiate two categories of data is going to be <a href="http://99designs.com/designer-blog/2013/04/17/designers-need-to-understand-color-blindness/" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://99designs.com/designer-blog/2013/04/17/designers-need-to-understand-color-blindness/&#39;, &#39;completely incomprehensible&#39;]);">completely incomprehensible</a> for anyone with red-green color blindness. Whenever possible, stick to using color blind-friendly color schemes, such as <a href="http://tableaufriction.blogspot.ro/2012/11/finally-you-can-use-tableau-data-colors.html" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://tableaufriction.blogspot.ro/2012/11/finally-you-can-use-tableau-data-colors.html&#39;, &#39;Tableau’s “Color Blind 10.”&#39;]);">Tableau’s “Color Blind 10.”</a></p>
+<h3>Required libraries</h3>
+<p>You’ll need the following Python libraries installed to run this code:</p>
+<ul>
+<li>matplotlib</li>
+<li>pandas</li>
+</ul>
+<p>The <a href="http://continuum.io/downloads" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://continuum.io/downloads&#39;, &#39;Anaconda Python distribution&#39;]);">Anaconda Python distribution</a> provides an easy double-click installer that includes all of the libraries you’ll need.</p>
+<h3>Blah, blah, blah… let’s get to the code</h3>
+<p>Now that we’ve covered the basics of graphic design, let’s dive into the code. I’ll explain the “what” and “why” of each line of code with inline comments.</p>
+<h4>Line plots</h4>
+<p><a href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/percent-bachelors-degrees-women-usa.png"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/percent-bachelors-degrees-women-usa.png" alt="percent-bachelors-degrees-women-usa" width="873" height="907" class="aligncenter size-full wp-image-4666" srcset="http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa.png 873w, http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa-288x300.png 288w, http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa-100x103.png 100w, http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa-150x155.png 150w, http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa-200x207.png 200w, http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa-300x311.png 300w, http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa-450x467.png 450w, http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa-600x623.png 600w" sizes="(max-width: 873px) 100vw, 873px"></a></p>
+<div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;ViewSource&#39;,this);return false;">view plain</a><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;CopyToClipboard&#39;,this);return false;">copy to clipboard</a><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;PrintSource&#39;,this);return false;">print</a><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;About&#39;,this);return false;">?</a></div></div><ol start="1" class="dp-py"><li class="alt"><span><span class="keyword">import</span><span>&nbsp;matplotlib.pyplot&nbsp;as&nbsp;plt&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">import</span><span>&nbsp;pandas&nbsp;as&nbsp;pd&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Read&nbsp;the&nbsp;data&nbsp;into&nbsp;a&nbsp;pandas&nbsp;DataFrame.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>gender_degree_data&nbsp;=&nbsp;pd.read_csv(<span class="string">"http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa.csv"</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;These&nbsp;are&nbsp;the&nbsp;"Tableau&nbsp;20"&nbsp;colors&nbsp;as&nbsp;RGB.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>tableau20&nbsp;=&nbsp;[(<span class="number">31</span><span>,&nbsp;</span><span class="number">119</span><span>,&nbsp;</span><span class="number">180</span><span>),&nbsp;(</span><span class="number">174</span><span>,&nbsp;</span><span class="number">199</span><span>,&nbsp;</span><span class="number">232</span><span>),&nbsp;(</span><span class="number">255</span><span>,&nbsp;</span><span class="number">127</span><span>,&nbsp;</span><span class="number">14</span><span>),&nbsp;(</span><span class="number">255</span><span>,&nbsp;</span><span class="number">187</span><span>,&nbsp;</span><span class="number">120</span><span>),&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="number">44</span><span>,&nbsp;</span><span class="number">160</span><span>,&nbsp;</span><span class="number">44</span><span>),&nbsp;(</span><span class="number">152</span><span>,&nbsp;</span><span class="number">223</span><span>,&nbsp;</span><span class="number">138</span><span>),&nbsp;(</span><span class="number">214</span><span>,&nbsp;</span><span class="number">39</span><span>,&nbsp;</span><span class="number">40</span><span>),&nbsp;(</span><span class="number">255</span><span>,&nbsp;</span><span class="number">152</span><span>,&nbsp;</span><span class="number">150</span><span>),&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="number">148</span><span>,&nbsp;</span><span class="number">103</span><span>,&nbsp;</span><span class="number">189</span><span>),&nbsp;(</span><span class="number">197</span><span>,&nbsp;</span><span class="number">176</span><span>,&nbsp;</span><span class="number">213</span><span>),&nbsp;(</span><span class="number">140</span><span>,&nbsp;</span><span class="number">86</span><span>,&nbsp;</span><span class="number">75</span><span>),&nbsp;(</span><span class="number">196</span><span>,&nbsp;</span><span class="number">156</span><span>,&nbsp;</span><span class="number">148</span><span>),&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="number">227</span><span>,&nbsp;</span><span class="number">119</span><span>,&nbsp;</span><span class="number">194</span><span>),&nbsp;(</span><span class="number">247</span><span>,&nbsp;</span><span class="number">182</span><span>,&nbsp;</span><span class="number">210</span><span>),&nbsp;(</span><span class="number">127</span><span>,&nbsp;</span><span class="number">127</span><span>,&nbsp;</span><span class="number">127</span><span>),&nbsp;(</span><span class="number">199</span><span>,&nbsp;</span><span class="number">199</span><span>,&nbsp;</span><span class="number">199</span><span>),&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="number">188</span><span>,&nbsp;</span><span class="number">189</span><span>,&nbsp;</span><span class="number">34</span><span>),&nbsp;(</span><span class="number">219</span><span>,&nbsp;</span><span class="number">219</span><span>,&nbsp;</span><span class="number">141</span><span>),&nbsp;(</span><span class="number">23</span><span>,&nbsp;</span><span class="number">190</span><span>,&nbsp;</span><span class="number">207</span><span>),&nbsp;(</span><span class="number">158</span><span>,&nbsp;</span><span class="number">218</span><span>,&nbsp;</span><span class="number">229</span><span>)]&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Scale&nbsp;the&nbsp;RGB&nbsp;values&nbsp;to&nbsp;the&nbsp;[0,&nbsp;1]&nbsp;range,&nbsp;which&nbsp;is&nbsp;the&nbsp;format&nbsp;matplotlib&nbsp;accepts.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">for</span><span>&nbsp;i&nbsp;</span><span class="keyword">in</span><span>&nbsp;range(len(tableau20)):&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;r,&nbsp;g,&nbsp;b&nbsp;=&nbsp;tableau20[i]&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;tableau20[i]&nbsp;=&nbsp;(r&nbsp;/&nbsp;<span class="number">255.</span><span>,&nbsp;g&nbsp;/&nbsp;</span><span class="number">255.</span><span>,&nbsp;b&nbsp;/&nbsp;</span><span class="number">255.</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;You&nbsp;typically&nbsp;want&nbsp;your&nbsp;plot&nbsp;to&nbsp;be&nbsp;~1.33x&nbsp;wider&nbsp;than&nbsp;tall.&nbsp;This&nbsp;plot&nbsp;is&nbsp;a&nbsp;rare&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;exception&nbsp;because&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;being&nbsp;plotted&nbsp;on&nbsp;it.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;Common&nbsp;sizes:&nbsp;(10,&nbsp;7.5)&nbsp;and&nbsp;(12,&nbsp;9)&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>plt.figure(figsize=(<span class="number">12</span><span>,&nbsp;</span><span class="number">14</span><span>))&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Remove&nbsp;the&nbsp;plot&nbsp;frame&nbsp;lines.&nbsp;They&nbsp;are&nbsp;unnecessary&nbsp;chartjunk.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>ax&nbsp;=&nbsp;plt.subplot(<span class="number">111</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>ax.spines[<span class="string">"top"</span><span>].set_visible(</span><span class="special">False</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>ax.spines[<span class="string">"bottom"</span><span>].set_visible(</span><span class="special">False</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>ax.spines[<span class="string">"right"</span><span>].set_visible(</span><span class="special">False</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>ax.spines[<span class="string">"left"</span><span>].set_visible(</span><span class="special">False</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Ensure&nbsp;that&nbsp;the&nbsp;axis&nbsp;ticks&nbsp;only&nbsp;show&nbsp;up&nbsp;on&nbsp;the&nbsp;bottom&nbsp;and&nbsp;left&nbsp;of&nbsp;the&nbsp;plot.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;Ticks&nbsp;on&nbsp;the&nbsp;right&nbsp;and&nbsp;top&nbsp;of&nbsp;the&nbsp;plot&nbsp;are&nbsp;generally&nbsp;unnecessary&nbsp;chartjunk.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>ax.get_xaxis().tick_bottom()&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li class=""><span>ax.get_yaxis().tick_left()&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Limit&nbsp;the&nbsp;range&nbsp;of&nbsp;the&nbsp;plot&nbsp;to&nbsp;only&nbsp;where&nbsp;the&nbsp;data&nbsp;is.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;Avoid&nbsp;unnecessary&nbsp;whitespace.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>plt.ylim(<span class="number">0</span><span>,&nbsp;</span><span class="number">90</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.xlim(<span class="number">1968</span><span>,&nbsp;</span><span class="number">2014</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Make&nbsp;sure&nbsp;your&nbsp;axis&nbsp;ticks&nbsp;are&nbsp;large&nbsp;enough&nbsp;to&nbsp;be&nbsp;easily&nbsp;read.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;You&nbsp;don't&nbsp;want&nbsp;your&nbsp;viewers&nbsp;squinting&nbsp;to&nbsp;read&nbsp;your&nbsp;plot.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.yticks(range(<span class="number">0</span><span>,&nbsp;</span><span class="number">91</span><span>,&nbsp;</span><span class="number">10</span><span>),&nbsp;[str(x)&nbsp;+&nbsp;</span><span class="string">"%"</span><span>&nbsp;</span><span class="keyword">for</span><span>&nbsp;x&nbsp;</span><span class="keyword">in</span><span>&nbsp;range(</span><span class="number">0</span><span>,&nbsp;</span><span class="number">91</span><span>,&nbsp;</span><span class="number">10</span><span>)],&nbsp;fontsize=</span><span class="number">14</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>plt.xticks(fontsize=<span class="number">14</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Provide&nbsp;tick&nbsp;lines&nbsp;across&nbsp;the&nbsp;plot&nbsp;to&nbsp;help&nbsp;your&nbsp;viewers&nbsp;trace&nbsp;along&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;the&nbsp;axis&nbsp;ticks.&nbsp;Make&nbsp;sure&nbsp;that&nbsp;the&nbsp;lines&nbsp;are&nbsp;light&nbsp;and&nbsp;small&nbsp;so&nbsp;they&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;don't&nbsp;obscure&nbsp;the&nbsp;primary&nbsp;data&nbsp;lines.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">for</span><span>&nbsp;y&nbsp;</span><span class="keyword">in</span><span>&nbsp;range(</span><span class="number">10</span><span>,&nbsp;</span><span class="number">91</span><span>,&nbsp;</span><span class="number">10</span><span>):&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;plt.plot(range(<span class="number">1968</span><span>,&nbsp;</span><span class="number">2012</span><span>),&nbsp;[y]&nbsp;*&nbsp;len(range(</span><span class="number">1968</span><span>,&nbsp;</span><span class="number">2012</span><span>)),&nbsp;</span><span class="string">"--"</span><span>,&nbsp;lw=</span><span class="number">0.5</span><span>,&nbsp;color=</span><span class="string">"black"</span><span>,&nbsp;alpha=</span><span class="number">0.3</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Remove&nbsp;the&nbsp;tick&nbsp;marks;&nbsp;they&nbsp;are&nbsp;unnecessary&nbsp;with&nbsp;the&nbsp;tick&nbsp;lines&nbsp;we&nbsp;just&nbsp;plotted.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.tick_params(axis=<span class="string">"both"</span><span>,&nbsp;which=</span><span class="string">"both"</span><span>,&nbsp;bottom=</span><span class="string">"off"</span><span>,&nbsp;top=</span><span class="string">"off"</span><span>,&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labelbottom=<span class="string">"on"</span><span>,&nbsp;left=</span><span class="string">"off"</span><span>,&nbsp;right=</span><span class="string">"off"</span><span>,&nbsp;labelleft=</span><span class="string">"on"</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Now&nbsp;that&nbsp;the&nbsp;plot&nbsp;is&nbsp;prepared,&nbsp;it's&nbsp;time&nbsp;to&nbsp;actually&nbsp;plot&nbsp;the&nbsp;data!&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;Note&nbsp;that&nbsp;I&nbsp;plotted&nbsp;the&nbsp;majors&nbsp;in&nbsp;order&nbsp;of&nbsp;the&nbsp;highest&nbsp;%&nbsp;in&nbsp;the&nbsp;final&nbsp;year.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>majors&nbsp;=&nbsp;[<span class="string">'Health&nbsp;Professions'</span><span>,&nbsp;</span><span class="string">'Public&nbsp;Administration'</span><span>,&nbsp;</span><span class="string">'Education'</span><span>,&nbsp;</span><span class="string">'Psychology'</span><span>,&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'Foreign&nbsp;Languages'</span><span>,&nbsp;</span><span class="string">'English'</span><span>,&nbsp;</span><span class="string">'Communications\nand&nbsp;Journalism'</span><span>,&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'Art&nbsp;and&nbsp;Performance'</span><span>,&nbsp;</span><span class="string">'Biology'</span><span>,&nbsp;</span><span class="string">'Agriculture'</span><span>,&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'Social&nbsp;Sciences&nbsp;and&nbsp;History'</span><span>,&nbsp;</span><span class="string">'Business'</span><span>,&nbsp;</span><span class="string">'Math&nbsp;and&nbsp;Statistics'</span><span>,&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'Architecture'</span><span>,&nbsp;</span><span class="string">'Physical&nbsp;Sciences'</span><span>,&nbsp;</span><span class="string">'Computer&nbsp;Science'</span><span>,&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'Engineering'</span><span>]&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="keyword">for</span><span>&nbsp;rank,&nbsp;column&nbsp;</span><span class="keyword">in</span><span>&nbsp;enumerate(majors):&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;Plot&nbsp;each&nbsp;line&nbsp;separately&nbsp;with&nbsp;its&nbsp;own&nbsp;color,&nbsp;using&nbsp;the&nbsp;Tableau&nbsp;20&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;color&nbsp;set&nbsp;in&nbsp;order.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;plt.plot(gender_degree_data.Year.values,&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gender_degree_data[column.replace(<span class="string">"\n"</span><span>,&nbsp;</span><span class="string">"&nbsp;"</span><span>)].values,&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw=<span class="number">2.5</span><span>,&nbsp;color=tableau20[rank])&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;Add&nbsp;a&nbsp;text&nbsp;label&nbsp;to&nbsp;the&nbsp;right&nbsp;end&nbsp;of&nbsp;every&nbsp;line.&nbsp;Most&nbsp;of&nbsp;the&nbsp;code&nbsp;below&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;is&nbsp;adding&nbsp;specific&nbsp;offsets&nbsp;y&nbsp;position&nbsp;because&nbsp;some&nbsp;labels&nbsp;overlapped.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;=&nbsp;gender_degree_data[column.replace(<span class="string">"\n"</span><span>,&nbsp;</span><span class="string">"&nbsp;"</span><span>)].values[-</span><span class="number">1</span><span>]&nbsp;-&nbsp;</span><span class="number">0.5</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;column&nbsp;==&nbsp;</span><span class="string">"Foreign&nbsp;Languages"</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;+=&nbsp;<span class="number">0.5</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;column&nbsp;==&nbsp;</span><span class="string">"English"</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;-=&nbsp;<span class="number">0.5</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;column&nbsp;==&nbsp;</span><span class="string">"Communications\nand&nbsp;Journalism"</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;+=&nbsp;<span class="number">0.75</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;column&nbsp;==&nbsp;</span><span class="string">"Art&nbsp;and&nbsp;Performance"</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;-=&nbsp;<span class="number">0.25</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;column&nbsp;==&nbsp;</span><span class="string">"Agriculture"</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;+=&nbsp;<span class="number">1.25</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;column&nbsp;==&nbsp;</span><span class="string">"Social&nbsp;Sciences&nbsp;and&nbsp;History"</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;+=&nbsp;<span class="number">0.25</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;column&nbsp;==&nbsp;</span><span class="string">"Business"</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;-=&nbsp;<span class="number">0.75</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;column&nbsp;==&nbsp;</span><span class="string">"Math&nbsp;and&nbsp;Statistics"</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;+=&nbsp;<span class="number">0.75</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;column&nbsp;==&nbsp;</span><span class="string">"Architecture"</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;-=&nbsp;<span class="number">0.75</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;column&nbsp;==&nbsp;</span><span class="string">"Computer&nbsp;Science"</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;+=&nbsp;<span class="number">0.75</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;column&nbsp;==&nbsp;</span><span class="string">"Engineering"</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_pos&nbsp;-=&nbsp;<span class="number">0.25</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;Again,&nbsp;make&nbsp;sure&nbsp;that&nbsp;all&nbsp;labels&nbsp;are&nbsp;large&nbsp;enough&nbsp;to&nbsp;be&nbsp;easily&nbsp;read&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;by&nbsp;the&nbsp;viewer.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;plt.text(<span class="number">2011.5</span><span>,&nbsp;y_pos,&nbsp;column,&nbsp;fontsize=</span><span class="number">14</span><span>,&nbsp;color=tableau20[rank])&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;matplotlib's&nbsp;title()&nbsp;call&nbsp;centers&nbsp;the&nbsp;title&nbsp;on&nbsp;the&nbsp;plot,&nbsp;but&nbsp;not&nbsp;the&nbsp;graph,&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;so&nbsp;I&nbsp;used&nbsp;the&nbsp;text()&nbsp;call&nbsp;to&nbsp;customize&nbsp;where&nbsp;the&nbsp;title&nbsp;goes.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Make&nbsp;the&nbsp;title&nbsp;big&nbsp;enough&nbsp;so&nbsp;it&nbsp;spans&nbsp;the&nbsp;entire&nbsp;plot,&nbsp;but&nbsp;don't&nbsp;make&nbsp;it&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;so&nbsp;big&nbsp;that&nbsp;it&nbsp;requires&nbsp;two&nbsp;lines&nbsp;to&nbsp;show.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Note&nbsp;that&nbsp;if&nbsp;the&nbsp;title&nbsp;is&nbsp;descriptive&nbsp;enough,&nbsp;it&nbsp;is&nbsp;unnecessary&nbsp;to&nbsp;include&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;axis&nbsp;labels;&nbsp;they&nbsp;are&nbsp;self-evident,&nbsp;in&nbsp;this&nbsp;plot's&nbsp;case.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>plt.text(<span class="number">1995</span><span>,&nbsp;</span><span class="number">93</span><span>,&nbsp;</span><span class="string">"Percentage&nbsp;of&nbsp;Bachelor's&nbsp;degrees&nbsp;conferred&nbsp;to&nbsp;women&nbsp;in&nbsp;the&nbsp;U.S.A."</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">",&nbsp;by&nbsp;major&nbsp;(1970-2012)"</span><span>,&nbsp;fontsize=</span><span class="number">17</span><span>,&nbsp;ha=</span><span class="string">"center"</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Always&nbsp;include&nbsp;your&nbsp;data&nbsp;source(s)&nbsp;and&nbsp;copyright&nbsp;notice!&nbsp;And&nbsp;for&nbsp;your&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;data&nbsp;sources,&nbsp;tell&nbsp;your&nbsp;viewers&nbsp;exactly&nbsp;where&nbsp;the&nbsp;data&nbsp;came&nbsp;from,&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;preferably&nbsp;with&nbsp;a&nbsp;direct&nbsp;link&nbsp;to&nbsp;the&nbsp;data.&nbsp;Just&nbsp;telling&nbsp;your&nbsp;viewers&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;that&nbsp;you&nbsp;used&nbsp;data&nbsp;from&nbsp;the&nbsp;"U.S.&nbsp;Census&nbsp;Bureau"&nbsp;is&nbsp;completely&nbsp;useless:&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;the&nbsp;U.S.&nbsp;Census&nbsp;Bureau&nbsp;provides&nbsp;all&nbsp;kinds&nbsp;of&nbsp;data,&nbsp;so&nbsp;how&nbsp;are&nbsp;your&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;viewers&nbsp;supposed&nbsp;to&nbsp;know&nbsp;which&nbsp;data&nbsp;set&nbsp;you&nbsp;used?&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.text(<span class="number">1966</span><span>,&nbsp;-</span><span class="number">8</span><span>,&nbsp;</span><span class="string">"Data&nbsp;source:&nbsp;nces.ed.gov/programs/digest/2013menu_tables.asp"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"\nAuthor:&nbsp;Randy&nbsp;Olson&nbsp;(randalolson.com&nbsp;/&nbsp;@randal_olson)"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"\nNote:&nbsp;Some&nbsp;majors&nbsp;are&nbsp;missing&nbsp;because&nbsp;the&nbsp;historical&nbsp;data&nbsp;"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"is&nbsp;not&nbsp;available&nbsp;for&nbsp;them"</span><span>,&nbsp;fontsize=</span><span class="number">10</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Finally,&nbsp;save&nbsp;the&nbsp;figure&nbsp;as&nbsp;a&nbsp;PNG.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;You&nbsp;can&nbsp;also&nbsp;save&nbsp;it&nbsp;as&nbsp;a&nbsp;PDF,&nbsp;JPEG,&nbsp;etc.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;Just&nbsp;change&nbsp;the&nbsp;file&nbsp;extension&nbsp;in&nbsp;this&nbsp;call.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;bbox_inches="tight"&nbsp;removes&nbsp;all&nbsp;the&nbsp;extra&nbsp;whitespace&nbsp;on&nbsp;the&nbsp;edges&nbsp;of&nbsp;your&nbsp;plot.&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>plt.savefig(<span class="string">"percent-bachelors-degrees-women-usa.png"</span><span>,&nbsp;bbox_inches=</span><span class="string">"tight"</span><span>)&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="python:nogutter" style="display: none;">import matplotlib.pyplot as plt
+import pandas as pd
+
+# Read the data into a pandas DataFrame.  
+gender_degree_data = pd.read_csv("http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa.csv")  
+
+# These are the "Tableau 20" colors as RGB.  
+tableau20 = [(31, 119, 180), (174, 199, 232), (255, 127, 14), (255, 187, 120),  
+             (44, 160, 44), (152, 223, 138), (214, 39, 40), (255, 152, 150),  
+             (148, 103, 189), (197, 176, 213), (140, 86, 75), (196, 156, 148),  
+             (227, 119, 194), (247, 182, 210), (127, 127, 127), (199, 199, 199),  
+             (188, 189, 34), (219, 219, 141), (23, 190, 207), (158, 218, 229)]  
+
+# Scale the RGB values to the [0, 1] range, which is the format matplotlib accepts.  
+for i in range(len(tableau20)):  
+    r, g, b = tableau20[i]  
+    tableau20[i] = (r / 255., g / 255., b / 255.)  
+
+# You typically want your plot to be ~1.33x wider than tall. This plot is a rare  
+# exception because of the number of lines being plotted on it.  
+# Common sizes: (10, 7.5) and (12, 9)  
+plt.figure(figsize=(12, 14))  
+
+# Remove the plot frame lines. They are unnecessary chartjunk.  
+ax = plt.subplot(111)  
+ax.spines["top"].set_visible(False)  
+ax.spines["bottom"].set_visible(False)  
+ax.spines["right"].set_visible(False)  
+ax.spines["left"].set_visible(False)  
+
+# Ensure that the axis ticks only show up on the bottom and left of the plot.  
+# Ticks on the right and top of the plot are generally unnecessary chartjunk.  
+ax.get_xaxis().tick_bottom()  
+ax.get_yaxis().tick_left()  
+
+# Limit the range of the plot to only where the data is.  
+# Avoid unnecessary whitespace.  
+plt.ylim(0, 90)  
+plt.xlim(1968, 2014)  
+
+# Make sure your axis ticks are large enough to be easily read.  
+# You don't want your viewers squinting to read your plot.  
+plt.yticks(range(0, 91, 10), [str(x) + "%" for x in range(0, 91, 10)], fontsize=14)  
+plt.xticks(fontsize=14)  
+
+# Provide tick lines across the plot to help your viewers trace along  
+# the axis ticks. Make sure that the lines are light and small so they  
+# don't obscure the primary data lines.  
+for y in range(10, 91, 10):  
+    plt.plot(range(1968, 2012), [y] * len(range(1968, 2012)), "--", lw=0.5, color="black", alpha=0.3)  
+
+# Remove the tick marks; they are unnecessary with the tick lines we just plotted.  
+plt.tick_params(axis="both", which="both", bottom="off", top="off",  
+                labelbottom="on", left="off", right="off", labelleft="on")  
+
+# Now that the plot is prepared, it's time to actually plot the data!  
+# Note that I plotted the majors in order of the highest % in the final year.  
+majors = ['Health Professions', 'Public Administration', 'Education', 'Psychology',  
+          'Foreign Languages', 'English', 'Communications\nand Journalism',  
+          'Art and Performance', 'Biology', 'Agriculture',  
+          'Social Sciences and History', 'Business', 'Math and Statistics',  
+          'Architecture', 'Physical Sciences', 'Computer Science',  
+          'Engineering']  
+
+for rank, column in enumerate(majors):  
+    # Plot each line separately with its own color, using the Tableau 20  
+    # color set in order.  
+    plt.plot(gender_degree_data.Year.values,  
+            gender_degree_data[column.replace("\n", " ")].values,  
+            lw=2.5, color=tableau20[rank])  
+
+    # Add a text label to the right end of every line. Most of the code below  
+    # is adding specific offsets y position because some labels overlapped.  
+    y_pos = gender_degree_data[column.replace("\n", " ")].values[-1] - 0.5  
+    if column == "Foreign Languages":  
+        y_pos += 0.5  
+    elif column == "English":  
+        y_pos -= 0.5  
+    elif column == "Communications\nand Journalism":  
+        y_pos += 0.75  
+    elif column == "Art and Performance":  
+        y_pos -= 0.25  
+    elif column == "Agriculture":  
+        y_pos += 1.25  
+    elif column == "Social Sciences and History":  
+        y_pos += 0.25  
+    elif column == "Business":  
+        y_pos -= 0.75  
+    elif column == "Math and Statistics":  
+        y_pos += 0.75  
+    elif column == "Architecture":  
+        y_pos -= 0.75  
+    elif column == "Computer Science":  
+        y_pos += 0.75  
+    elif column == "Engineering":  
+        y_pos -= 0.25  
+
+    # Again, make sure that all labels are large enough to be easily read  
+    # by the viewer.  
+    plt.text(2011.5, y_pos, column, fontsize=14, color=tableau20[rank])  
+
+# matplotlib's title() call centers the title on the plot, but not the graph,  
+# so I used the text() call to customize where the title goes.  
+
+# Make the title big enough so it spans the entire plot, but don't make it  
+# so big that it requires two lines to show.  
+
+# Note that if the title is descriptive enough, it is unnecessary to include  
+# axis labels; they are self-evident, in this plot's case.  
+plt.text(1995, 93, "Percentage of Bachelor's degrees conferred to women in the U.S.A."  
+       ", by major (1970-2012)", fontsize=17, ha="center")  
+
+# Always include your data source(s) and copyright notice! And for your  
+# data sources, tell your viewers exactly where the data came from,  
+# preferably with a direct link to the data. Just telling your viewers  
+# that you used data from the "U.S. Census Bureau" is completely useless:  
+# the U.S. Census Bureau provides all kinds of data, so how are your  
+# viewers supposed to know which data set you used?  
+plt.text(1966, -8, "Data source: nces.ed.gov/programs/digest/2013menu_tables.asp"  
+       "\nAuthor: Randy Olson (randalolson.com / @randal_olson)"  
+       "\nNote: Some majors are missing because the historical data "  
+       "is not available for them", fontsize=10)  
+
+# Finally, save the figure as a PNG.  
+# You can also save it as a PDF, JPEG, etc.  
+# Just change the file extension in this call.  
+# bbox_inches="tight" removes all the extra whitespace on the edges of your plot.  
+plt.savefig("percent-bachelors-degrees-women-usa.png", bbox_inches="tight")
+</pre>
+<hr>
+<h4>Line plots with error bars</h4>
+<p><a href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/chess-number-ply-over-time.png"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/chess-number-ply-over-time.png" alt="chess-number-ply-over-time" width="723" height="470" class="aligncenter size-full wp-image-4265" srcset="http://www.randalolson.com/wp-content/uploads/chess-number-ply-over-time.png 723w, http://www.randalolson.com/wp-content/uploads/chess-number-ply-over-time-300x195.png 300w, http://www.randalolson.com/wp-content/uploads/chess-number-ply-over-time-100x65.png 100w, http://www.randalolson.com/wp-content/uploads/chess-number-ply-over-time-150x97.png 150w, http://www.randalolson.com/wp-content/uploads/chess-number-ply-over-time-200x130.png 200w, http://www.randalolson.com/wp-content/uploads/chess-number-ply-over-time-450x292.png 450w, http://www.randalolson.com/wp-content/uploads/chess-number-ply-over-time-600x390.png 600w" sizes="(max-width: 723px) 100vw, 723px"></a></p>
+<div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;ViewSource&#39;,this);return false;">view plain</a><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;CopyToClipboard&#39;,this);return false;">copy to clipboard</a><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;PrintSource&#39;,this);return false;">print</a><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;About&#39;,this);return false;">?</a></div></div><ol start="1" class="dp-py"><li class="alt"><span><span class="keyword">import</span><span>&nbsp;pandas&nbsp;as&nbsp;pd&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">import</span><span>&nbsp;matplotlib.pyplot&nbsp;as&nbsp;plt&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">from</span><span>&nbsp;scipy.stats&nbsp;</span><span class="keyword">import</span><span>&nbsp;sem&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;This&nbsp;function&nbsp;takes&nbsp;an&nbsp;array&nbsp;of&nbsp;numbers&nbsp;and&nbsp;smoothes&nbsp;them&nbsp;out.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;Smoothing&nbsp;is&nbsp;useful&nbsp;for&nbsp;making&nbsp;plots&nbsp;a&nbsp;little&nbsp;easier&nbsp;to&nbsp;read.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">def</span><span>&nbsp;sliding_mean(data_array,&nbsp;window=</span><span class="number">5</span><span>):&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;data_array&nbsp;=&nbsp;array(data_array)&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;new_list&nbsp;=&nbsp;[]&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;i&nbsp;</span><span class="keyword">in</span><span>&nbsp;range(len(data_array)):&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;indices&nbsp;=&nbsp;range(max(i&nbsp;-&nbsp;window&nbsp;+&nbsp;<span class="number">1</span><span>,&nbsp;</span><span class="number">0</span><span>),&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min(i&nbsp;+&nbsp;window&nbsp;+&nbsp;<span class="number">1</span><span>,&nbsp;len(data_array)))&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avg&nbsp;=&nbsp;<span class="number">0</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;j&nbsp;</span><span class="keyword">in</span><span>&nbsp;indices:&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avg&nbsp;+=&nbsp;data_array[j]&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avg&nbsp;/=&nbsp;float(len(indices))&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_list.append(avg)&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;array(new_list)&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Due&nbsp;to&nbsp;an&nbsp;agreement&nbsp;with&nbsp;the&nbsp;ChessGames.com&nbsp;admin,&nbsp;I&nbsp;cannot&nbsp;make&nbsp;the&nbsp;data</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;for&nbsp;this&nbsp;plot&nbsp;publicly&nbsp;available.&nbsp;This&nbsp;function&nbsp;reads&nbsp;in&nbsp;and&nbsp;parses&nbsp;the</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;chess&nbsp;data&nbsp;set&nbsp;into&nbsp;a&nbsp;tabulated&nbsp;pandas&nbsp;DataFrame.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>chess_data&nbsp;=&nbsp;read_chess_data()&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;These&nbsp;variables&nbsp;are&nbsp;where&nbsp;we&nbsp;put&nbsp;the&nbsp;years&nbsp;(x-axis),&nbsp;means&nbsp;(y-axis),&nbsp;and&nbsp;error&nbsp;bar&nbsp;values.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;We&nbsp;could&nbsp;just&nbsp;as&nbsp;easily&nbsp;replace&nbsp;the&nbsp;means&nbsp;with&nbsp;medians,</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;and&nbsp;standard&nbsp;errors&nbsp;(SEMs)&nbsp;with&nbsp;standard&nbsp;deviations&nbsp;(STDs).</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>years&nbsp;=&nbsp;chess_data.groupby(<span class="string">"Year"</span><span>).PlyCount.mean().keys()&nbsp;&nbsp;</span></span></li><li class=""><span>mean_PlyCount&nbsp;=&nbsp;sliding_mean(chess_data.groupby(<span class="string">"Year"</span><span>).PlyCount.mean().values,&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window=<span class="number">10</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>sem_PlyCount&nbsp;=&nbsp;sliding_mean(chess_data.groupby(<span class="string">"Year"</span><span>).PlyCount.apply(sem).mul(</span><span class="number">1.96</span><span>).values,&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window=<span class="number">10</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;You&nbsp;typically&nbsp;want&nbsp;your&nbsp;plot&nbsp;to&nbsp;be&nbsp;~1.33x&nbsp;wider&nbsp;than&nbsp;tall.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;Common&nbsp;sizes:&nbsp;(10,&nbsp;7.5)&nbsp;and&nbsp;(12,&nbsp;9)</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.figure(figsize=(<span class="number">12</span><span>,&nbsp;</span><span class="number">9</span><span>))&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Remove&nbsp;the&nbsp;plot&nbsp;frame&nbsp;lines.&nbsp;They&nbsp;are&nbsp;unnecessary&nbsp;chartjunk.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>ax&nbsp;=&nbsp;plt.subplot(<span class="number">111</span><span>)&nbsp;&nbsp;</span></span></li><li class="alt"><span>ax.spines[<span class="string">"top"</span><span>].set_visible(</span><span class="special">False</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>ax.spines[<span class="string">"right"</span><span>].set_visible(</span><span class="special">False</span><span>)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Ensure&nbsp;that&nbsp;the&nbsp;axis&nbsp;ticks&nbsp;only&nbsp;show&nbsp;up&nbsp;on&nbsp;the&nbsp;bottom&nbsp;and&nbsp;left&nbsp;of&nbsp;the&nbsp;plot.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;Ticks&nbsp;on&nbsp;the&nbsp;right&nbsp;and&nbsp;top&nbsp;of&nbsp;the&nbsp;plot&nbsp;are&nbsp;generally&nbsp;unnecessary&nbsp;chartjunk.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>ax.get_xaxis().tick_bottom()&nbsp;&nbsp;</span></li><li class="alt"><span>ax.get_yaxis().tick_left()&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Limit&nbsp;the&nbsp;range&nbsp;of&nbsp;the&nbsp;plot&nbsp;to&nbsp;only&nbsp;where&nbsp;the&nbsp;data&nbsp;is.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;Avoid&nbsp;unnecessary&nbsp;whitespace.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.ylim(<span class="number">63</span><span>,&nbsp;</span><span class="number">85</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Make&nbsp;sure&nbsp;your&nbsp;axis&nbsp;ticks&nbsp;are&nbsp;large&nbsp;enough&nbsp;to&nbsp;be&nbsp;easily&nbsp;read.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;You&nbsp;don't&nbsp;want&nbsp;your&nbsp;viewers&nbsp;squinting&nbsp;to&nbsp;read&nbsp;your&nbsp;plot.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.xticks(range(<span class="number">1850</span><span>,&nbsp;</span><span class="number">2011</span><span>,&nbsp;</span><span class="number">20</span><span>),&nbsp;fontsize=</span><span class="number">14</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>plt.yticks(range(<span class="number">65</span><span>,&nbsp;</span><span class="number">86</span><span>,&nbsp;</span><span class="number">5</span><span>),&nbsp;fontsize=</span><span class="number">14</span><span>)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Along&nbsp;the&nbsp;same&nbsp;vein,&nbsp;make&nbsp;sure&nbsp;your&nbsp;axis&nbsp;labels&nbsp;are&nbsp;large</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;enough&nbsp;to&nbsp;be&nbsp;easily&nbsp;read&nbsp;as&nbsp;well.&nbsp;Make&nbsp;them&nbsp;slightly&nbsp;larger</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;than&nbsp;your&nbsp;axis&nbsp;tick&nbsp;labels&nbsp;so&nbsp;they&nbsp;stand&nbsp;out.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.ylabel(<span class="string">"Ply&nbsp;per&nbsp;Game"</span><span>,&nbsp;fontsize=</span><span class="number">16</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Use&nbsp;matplotlib's&nbsp;fill_between()&nbsp;call&nbsp;to&nbsp;create&nbsp;error&nbsp;bars.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;Use&nbsp;the&nbsp;dark&nbsp;blue&nbsp;"#3F5D7D"&nbsp;as&nbsp;a&nbsp;nice&nbsp;fill&nbsp;color.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.fill_between(years,&nbsp;mean_PlyCount&nbsp;-&nbsp;sem_PlyCount,&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mean_PlyCount&nbsp;+&nbsp;sem_PlyCount,&nbsp;color=<span class="string">"#3F5D7D"</span><span>)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Plot&nbsp;the&nbsp;means&nbsp;as&nbsp;a&nbsp;white&nbsp;line&nbsp;in&nbsp;between&nbsp;the&nbsp;error&nbsp;bars.&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;White&nbsp;stands&nbsp;out&nbsp;best&nbsp;against&nbsp;the&nbsp;dark&nbsp;blue.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>plt.plot(years,&nbsp;mean_PlyCount,&nbsp;color=<span class="string">"white"</span><span>,&nbsp;lw=</span><span class="number">2</span><span>)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Make&nbsp;the&nbsp;title&nbsp;big&nbsp;enough&nbsp;so&nbsp;it&nbsp;spans&nbsp;the&nbsp;entire&nbsp;plot,&nbsp;but&nbsp;don't&nbsp;make&nbsp;it</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;so&nbsp;big&nbsp;that&nbsp;it&nbsp;requires&nbsp;two&nbsp;lines&nbsp;to&nbsp;show.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>plt.title(<span class="string">"Chess&nbsp;games&nbsp;are&nbsp;getting&nbsp;longer"</span><span>,&nbsp;fontsize=</span><span class="number">22</span><span>)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Always&nbsp;include&nbsp;your&nbsp;data&nbsp;source(s)&nbsp;and&nbsp;copyright&nbsp;notice!&nbsp;And&nbsp;for&nbsp;your</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;data&nbsp;sources,&nbsp;tell&nbsp;your&nbsp;viewers&nbsp;exactly&nbsp;where&nbsp;the&nbsp;data&nbsp;came&nbsp;from,</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;preferably&nbsp;with&nbsp;a&nbsp;direct&nbsp;link&nbsp;to&nbsp;the&nbsp;data.&nbsp;Just&nbsp;telling&nbsp;your&nbsp;viewers</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;that&nbsp;you&nbsp;used&nbsp;data&nbsp;from&nbsp;the&nbsp;"U.S.&nbsp;Census&nbsp;Bureau"&nbsp;is&nbsp;completely&nbsp;useless:</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;the&nbsp;U.S.&nbsp;Census&nbsp;Bureau&nbsp;provides&nbsp;all&nbsp;kinds&nbsp;of&nbsp;data,&nbsp;so&nbsp;how&nbsp;are&nbsp;your</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;viewers&nbsp;supposed&nbsp;to&nbsp;know&nbsp;which&nbsp;data&nbsp;set&nbsp;you&nbsp;used?</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>plt.xlabel(<span class="string">"\nData&nbsp;source:&nbsp;www.ChessGames.com&nbsp;|&nbsp;"</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Author:&nbsp;Randy&nbsp;Olson&nbsp;(randalolson.com&nbsp;/&nbsp;@randal_olson)"</span><span>,&nbsp;fontsize=</span><span class="number">10</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Finally,&nbsp;save&nbsp;the&nbsp;figure&nbsp;as&nbsp;a&nbsp;PNG.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;You&nbsp;can&nbsp;also&nbsp;save&nbsp;it&nbsp;as&nbsp;a&nbsp;PDF,&nbsp;JPEG,&nbsp;etc.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;Just&nbsp;change&nbsp;the&nbsp;file&nbsp;extension&nbsp;in&nbsp;this&nbsp;call.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;bbox_inches="tight"&nbsp;removes&nbsp;all&nbsp;the&nbsp;extra&nbsp;whitespace&nbsp;on&nbsp;the&nbsp;edges&nbsp;of&nbsp;your&nbsp;plot.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.savefig(<span class="string">"chess-number-ply-over-time.png"</span><span>,&nbsp;bbox_inches=</span><span class="string">"tight"</span><span>);&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="python:nogutter" style="display: none;">import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import sem
+
+# This function takes an array of numbers and smoothes them out.
+# Smoothing is useful for making plots a little easier to read.
+def sliding_mean(data_array, window=5):
+    data_array = array(data_array)
+    new_list = []
+    for i in range(len(data_array)):
+        indices = range(max(i - window + 1, 0),
+                        min(i + window + 1, len(data_array)))
+        avg = 0
+        for j in indices:
+            avg += data_array[j]
+        avg /= float(len(indices))
+        new_list.append(avg)
+        
+    return array(new_list)
+
+# Due to an agreement with the ChessGames.com admin, I cannot make the data
+# for this plot publicly available. This function reads in and parses the
+# chess data set into a tabulated pandas DataFrame.
+chess_data = read_chess_data()
+
+# These variables are where we put the years (x-axis), means (y-axis), and error bar values.
+# We could just as easily replace the means with medians,
+# and standard errors (SEMs) with standard deviations (STDs).
+years = chess_data.groupby("Year").PlyCount.mean().keys()
+mean_PlyCount = sliding_mean(chess_data.groupby("Year").PlyCount.mean().values,
+                             window=10)
+sem_PlyCount = sliding_mean(chess_data.groupby("Year").PlyCount.apply(sem).mul(1.96).values,
+                            window=10)
+
+# You typically want your plot to be ~1.33x wider than tall.
+# Common sizes: (10, 7.5) and (12, 9)
+plt.figure(figsize=(12, 9))
+
+# Remove the plot frame lines. They are unnecessary chartjunk.
+ax = plt.subplot(111)
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+
+# Ensure that the axis ticks only show up on the bottom and left of the plot.
+# Ticks on the right and top of the plot are generally unnecessary chartjunk.
+ax.get_xaxis().tick_bottom()
+ax.get_yaxis().tick_left()
+
+# Limit the range of the plot to only where the data is.
+# Avoid unnecessary whitespace.
+plt.ylim(63, 85)
+
+# Make sure your axis ticks are large enough to be easily read.
+# You don't want your viewers squinting to read your plot.
+plt.xticks(range(1850, 2011, 20), fontsize=14)
+plt.yticks(range(65, 86, 5), fontsize=14)
+
+# Along the same vein, make sure your axis labels are large
+# enough to be easily read as well. Make them slightly larger
+# than your axis tick labels so they stand out.
+plt.ylabel("Ply per Game", fontsize=16)
+
+# Use matplotlib's fill_between() call to create error bars.
+# Use the dark blue "#3F5D7D" as a nice fill color.
+plt.fill_between(years, mean_PlyCount - sem_PlyCount,
+                 mean_PlyCount + sem_PlyCount, color="#3F5D7D")
+
+# Plot the means as a white line in between the error bars. 
+# White stands out best against the dark blue.
+plt.plot(years, mean_PlyCount, color="white", lw=2)
+
+# Make the title big enough so it spans the entire plot, but don't make it
+# so big that it requires two lines to show.
+plt.title("Chess games are getting longer", fontsize=22)
+
+# Always include your data source(s) and copyright notice! And for your
+# data sources, tell your viewers exactly where the data came from,
+# preferably with a direct link to the data. Just telling your viewers
+# that you used data from the "U.S. Census Bureau" is completely useless:
+# the U.S. Census Bureau provides all kinds of data, so how are your
+# viewers supposed to know which data set you used?
+plt.xlabel("\nData source: www.ChessGames.com | "
+           "Author: Randy Olson (randalolson.com / @randal_olson)", fontsize=10)
+
+# Finally, save the figure as a PNG.
+# You can also save it as a PDF, JPEG, etc.
+# Just change the file extension in this call.
+# bbox_inches="tight" removes all the extra whitespace on the edges of your plot.
+plt.savefig("chess-number-ply-over-time.png", bbox_inches="tight");
+</pre>
+<hr>
+<h4>Histograms</h4>
+<p><a href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/chess-elo-rating-distribution.png"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/chess-elo-rating-distribution.png" alt="chess-elo-rating-distribution" width="767" height="480" class="aligncenter size-full wp-image-4260" srcset="http://www.randalolson.com/wp-content/uploads/chess-elo-rating-distribution.png 767w, http://www.randalolson.com/wp-content/uploads/chess-elo-rating-distribution-300x187.png 300w, http://www.randalolson.com/wp-content/uploads/chess-elo-rating-distribution-100x62.png 100w, http://www.randalolson.com/wp-content/uploads/chess-elo-rating-distribution-150x93.png 150w, http://www.randalolson.com/wp-content/uploads/chess-elo-rating-distribution-200x125.png 200w, http://www.randalolson.com/wp-content/uploads/chess-elo-rating-distribution-450x281.png 450w, http://www.randalolson.com/wp-content/uploads/chess-elo-rating-distribution-600x375.png 600w" sizes="(max-width: 767px) 100vw, 767px"></a></p>
+<div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;ViewSource&#39;,this);return false;">view plain</a><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;CopyToClipboard&#39;,this);return false;">copy to clipboard</a><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;PrintSource&#39;,this);return false;">print</a><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" onclick="dp.sh.Toolbar.Command(&#39;About&#39;,this);return false;">?</a></div></div><ol start="1" class="dp-py"><li class="alt"><span><span class="keyword">import</span><span>&nbsp;pandas&nbsp;as&nbsp;pd&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">import</span><span>&nbsp;matplotlib.pyplot&nbsp;as&nbsp;plt&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Due&nbsp;to&nbsp;an&nbsp;agreement&nbsp;with&nbsp;the&nbsp;ChessGames.com&nbsp;admin,&nbsp;I&nbsp;cannot&nbsp;make&nbsp;the&nbsp;data</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;for&nbsp;this&nbsp;plot&nbsp;publicly&nbsp;available.&nbsp;This&nbsp;function&nbsp;reads&nbsp;in&nbsp;and&nbsp;parses&nbsp;the</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;chess&nbsp;data&nbsp;set&nbsp;into&nbsp;a&nbsp;tabulated&nbsp;pandas&nbsp;DataFrame.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>chess_data&nbsp;=&nbsp;read_chess_data()&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;You&nbsp;typically&nbsp;want&nbsp;your&nbsp;plot&nbsp;to&nbsp;be&nbsp;~1.33x&nbsp;wider&nbsp;than&nbsp;tall.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;Common&nbsp;sizes:&nbsp;(10,&nbsp;7.5)&nbsp;and&nbsp;(12,&nbsp;9)</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.figure(figsize=(<span class="number">12</span><span>,&nbsp;</span><span class="number">9</span><span>))&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Remove&nbsp;the&nbsp;plot&nbsp;frame&nbsp;lines.&nbsp;They&nbsp;are&nbsp;unnecessary&nbsp;chartjunk.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>ax&nbsp;=&nbsp;plt.subplot(<span class="number">111</span><span>)&nbsp;&nbsp;</span></span></li><li class="alt"><span>ax.spines[<span class="string">"top"</span><span>].set_visible(</span><span class="special">False</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>ax.spines[<span class="string">"right"</span><span>].set_visible(</span><span class="special">False</span><span>)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Ensure&nbsp;that&nbsp;the&nbsp;axis&nbsp;ticks&nbsp;only&nbsp;show&nbsp;up&nbsp;on&nbsp;the&nbsp;bottom&nbsp;and&nbsp;left&nbsp;of&nbsp;the&nbsp;plot.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;Ticks&nbsp;on&nbsp;the&nbsp;right&nbsp;and&nbsp;top&nbsp;of&nbsp;the&nbsp;plot&nbsp;are&nbsp;generally&nbsp;unnecessary&nbsp;chartjunk.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>ax.get_xaxis().tick_bottom()&nbsp;&nbsp;</span></li><li class="alt"><span>ax.get_yaxis().tick_left()&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Make&nbsp;sure&nbsp;your&nbsp;axis&nbsp;ticks&nbsp;are&nbsp;large&nbsp;enough&nbsp;to&nbsp;be&nbsp;easily&nbsp;read.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;You&nbsp;don't&nbsp;want&nbsp;your&nbsp;viewers&nbsp;squinting&nbsp;to&nbsp;read&nbsp;your&nbsp;plot.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.xticks(fontsize=<span class="number">14</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>plt.yticks(range(<span class="number">5000</span><span>,&nbsp;</span><span class="number">30001</span><span>,&nbsp;</span><span class="number">5000</span><span>),&nbsp;fontsize=</span><span class="number">14</span><span>)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Along&nbsp;the&nbsp;same&nbsp;vein,&nbsp;make&nbsp;sure&nbsp;your&nbsp;axis&nbsp;labels&nbsp;are&nbsp;large</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;enough&nbsp;to&nbsp;be&nbsp;easily&nbsp;read&nbsp;as&nbsp;well.&nbsp;Make&nbsp;them&nbsp;slightly&nbsp;larger</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;than&nbsp;your&nbsp;axis&nbsp;tick&nbsp;labels&nbsp;so&nbsp;they&nbsp;stand&nbsp;out.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.xlabel(<span class="string">"Elo&nbsp;Rating"</span><span>,&nbsp;fontsize=</span><span class="number">16</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>plt.ylabel(<span class="string">"Count"</span><span>,&nbsp;fontsize=</span><span class="number">16</span><span>)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Plot&nbsp;the&nbsp;histogram.&nbsp;Note&nbsp;that&nbsp;all&nbsp;I'm&nbsp;passing&nbsp;here&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;numbers.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;matplotlib&nbsp;automatically&nbsp;counts&nbsp;and&nbsp;bins&nbsp;the&nbsp;frequencies&nbsp;for&nbsp;us.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;"#3F5D7D"&nbsp;is&nbsp;the&nbsp;nice&nbsp;dark&nbsp;blue&nbsp;color.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;Make&nbsp;sure&nbsp;the&nbsp;data&nbsp;is&nbsp;sorted&nbsp;into&nbsp;enough&nbsp;bins&nbsp;so&nbsp;you&nbsp;can&nbsp;see&nbsp;the&nbsp;distribution.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>plt.hist(list(chess_data.WhiteElo.values)&nbsp;+&nbsp;list(chess_data.BlackElo.values),&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color=<span class="string">"#3F5D7D"</span><span>,&nbsp;bins=</span><span class="number">100</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="comment">#&nbsp;Always&nbsp;include&nbsp;your&nbsp;data&nbsp;source(s)&nbsp;and&nbsp;copyright&nbsp;notice!&nbsp;And&nbsp;for&nbsp;your</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;data&nbsp;sources,&nbsp;tell&nbsp;your&nbsp;viewers&nbsp;exactly&nbsp;where&nbsp;the&nbsp;data&nbsp;came&nbsp;from,</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;preferably&nbsp;with&nbsp;a&nbsp;direct&nbsp;link&nbsp;to&nbsp;the&nbsp;data.&nbsp;Just&nbsp;telling&nbsp;your&nbsp;viewers</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;that&nbsp;you&nbsp;used&nbsp;data&nbsp;from&nbsp;the&nbsp;"U.S.&nbsp;Census&nbsp;Bureau"&nbsp;is&nbsp;completely&nbsp;useless:</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;the&nbsp;U.S.&nbsp;Census&nbsp;Bureau&nbsp;provides&nbsp;all&nbsp;kinds&nbsp;of&nbsp;data,&nbsp;so&nbsp;how&nbsp;are&nbsp;your</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;viewers&nbsp;supposed&nbsp;to&nbsp;know&nbsp;which&nbsp;data&nbsp;set&nbsp;you&nbsp;used?</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>plt.text(<span class="number">1300</span><span>,&nbsp;-</span><span class="number">5000</span><span>,&nbsp;</span><span class="string">"Data&nbsp;source:&nbsp;www.ChessGames.com&nbsp;|&nbsp;"</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Author:&nbsp;Randy&nbsp;Olson&nbsp;(randalolson.com&nbsp;/&nbsp;@randal_olson)"</span><span>,&nbsp;fontsize=</span><span class="number">10</span><span>)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">#&nbsp;Finally,&nbsp;save&nbsp;the&nbsp;figure&nbsp;as&nbsp;a&nbsp;PNG.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;You&nbsp;can&nbsp;also&nbsp;save&nbsp;it&nbsp;as&nbsp;a&nbsp;PDF,&nbsp;JPEG,&nbsp;etc.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">#&nbsp;Just&nbsp;change&nbsp;the&nbsp;file&nbsp;extension&nbsp;in&nbsp;this&nbsp;call.</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="comment">#&nbsp;bbox_inches="tight"&nbsp;removes&nbsp;all&nbsp;the&nbsp;extra&nbsp;whitespace&nbsp;on&nbsp;the&nbsp;edges&nbsp;of&nbsp;your&nbsp;plot.</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>plt.savefig(<span class="string">"chess-elo-rating-distribution.png"</span><span>,&nbsp;bbox_inches=</span><span class="string">"tight"</span><span>);&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="python:nogutter" style="display: none;">import pandas as pd
+import matplotlib.pyplot as plt
+
+# Due to an agreement with the ChessGames.com admin, I cannot make the data
+# for this plot publicly available. This function reads in and parses the
+# chess data set into a tabulated pandas DataFrame.
+chess_data = read_chess_data()
+
+# You typically want your plot to be ~1.33x wider than tall.
+# Common sizes: (10, 7.5) and (12, 9)
+plt.figure(figsize=(12, 9))
+
+# Remove the plot frame lines. They are unnecessary chartjunk.
+ax = plt.subplot(111)
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+
+# Ensure that the axis ticks only show up on the bottom and left of the plot.
+# Ticks on the right and top of the plot are generally unnecessary chartjunk.
+ax.get_xaxis().tick_bottom()
+ax.get_yaxis().tick_left()
+
+# Make sure your axis ticks are large enough to be easily read.
+# You don't want your viewers squinting to read your plot.
+plt.xticks(fontsize=14)
+plt.yticks(range(5000, 30001, 5000), fontsize=14)
+
+# Along the same vein, make sure your axis labels are large
+# enough to be easily read as well. Make them slightly larger
+# than your axis tick labels so they stand out.
+plt.xlabel("Elo Rating", fontsize=16)
+plt.ylabel("Count", fontsize=16)
+
+# Plot the histogram. Note that all I'm passing here is a list of numbers.
+# matplotlib automatically counts and bins the frequencies for us.
+# "#3F5D7D" is the nice dark blue color.
+# Make sure the data is sorted into enough bins so you can see the distribution.
+plt.hist(list(chess_data.WhiteElo.values) + list(chess_data.BlackElo.values),
+         color="#3F5D7D", bins=100)
+
+# Always include your data source(s) and copyright notice! And for your
+# data sources, tell your viewers exactly where the data came from,
+# preferably with a direct link to the data. Just telling your viewers
+# that you used data from the "U.S. Census Bureau" is completely useless:
+# the U.S. Census Bureau provides all kinds of data, so how are your
+# viewers supposed to know which data set you used?
+plt.text(1300, -5000, "Data source: www.ChessGames.com | "
+         "Author: Randy Olson (randalolson.com / @randal_olson)", fontsize=10)
+
+# Finally, save the figure as a PNG.
+# You can also save it as a PDF, JPEG, etc.
+# Just change the file extension in this call.
+# bbox_inches="tight" removes all the extra whitespace on the edges of your plot.
+plt.savefig("chess-elo-rating-distribution.png", bbox_inches="tight");
+</pre>
+<hr>
+<h3>Easy interactives</h3>
+<p>As an added bonus, thanks to <a href="https://plot.ly/python/" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;https://plot.ly/python/&#39;, &#39;plot.ly&#39;]);">plot.ly</a>, it only takes <a href="http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s6_matplotlylib/s6_matplotlylib.ipynb" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s6_matplotlylib/s6_matplotlylib.ipynb&#39;, &#39;one more line of code&#39;]);">one more line of code</a> to turn your matplotlib plot into an interactive.</p>
+<p><iframe id="igraph" style="border:none" src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/saved_resource.html" width="873" height="810"></iframe></p>
+<hr>
+<h3>More Python plotting libraries</h3>
+<p>In this tutorial, I focused on making data visualizations with only Python’s basic matplotlib library. If you don’t feel like tweaking the plots yourself and want the library to produce better-looking plots on its own, check out the following libraries.</p>
+<ul>
+<li><a href="http://web.stanford.edu/~mwaskom/software/seaborn/examples/index.html#example-gallery" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://web.stanford.edu/~mwaskom/software/seaborn/examples/index.html#example-gallery&#39;, &#39;Seaborn&#39;]);">Seaborn</a> for statistical charts</li>
+<li><a href="http://blog.yhathq.com/posts/ggplot-for-python.html" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://blog.yhathq.com/posts/ggplot-for-python.html&#39;, &#39;ggplot2 for Python&#39;]);">ggplot2 for Python</a></li>
+<li><a href="http://olgabot.github.io/prettyplotlib/" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://olgabot.github.io/prettyplotlib/&#39;, &#39;prettyplotlib&#39;]);">prettyplotlib</a></li>
+<li><a href="http://bokeh.pydata.org/" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://bokeh.pydata.org&#39;, &#39;Bokeh&#39;]);">Bokeh</a> for interactive charts
+</li></ul>
+<hr>
+<h3>Recommended reading</h3>
+<p><a href="http://www.edwardtufte.com/tufte/" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://www.edwardtufte.com/tufte/&#39;, &#39;Edward Tufte&#39;]);">Edward Tufte</a> has been a pioneer of the “simple, effective plots” approach. Most of the graphic design of my visualizations has been inspired by reading his books.</p>
+<p><a href="http://www.amazon.com/The-Visual-Display-Quantitative-Information/dp/0961392142" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://www.amazon.com/The-Visual-Display-Quantitative-Information/dp/0961392142&#39;, &#39;The Visual Display of Quantitative Information&#39;]);">The Visual Display of Quantitative Information</a> is a classic book filled with plenty of graphical examples that everyone who wants to create beautiful data visualizations should read.</p>
+<p><a href="http://www.amazon.com/Envisioning-Information-Edward-R-Tufte/dp/0961392118/" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://www.amazon.com/Envisioning-Information-Edward-R-Tufte/dp/0961392118/&#39;, &#39;Envisioning Information&#39;]);">Envisioning Information</a> is an excellent follow-up to the first book, again with a plethora of beautiful graphical examples.</p>
+<p>There are plenty of other books out there about beautiful graphical design, but the two books above are the ones I found the most educational and inspiring.</p>
+<hr>
+<p>If you liked what you saw in this post and want to learn more, check out my <a href="http://shop.oreilly.com/product/0636920046592.do" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;http://shop.oreilly.com/product/0636920046592.do&#39;, &#39;Python data visualization video course&#39;]);">Python data visualization video course</a> that I made in collaboration with O’Reilly. In just one hour, I will cover these topics and much more, which will provide you with a strong starting point for your career in data visualization.</p>
+<p></p><center><iframe src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/684.html" height="230px" width="200px" scrolling="no" frameborder="0"></iframe></center><p></p><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-4882" class="share-facebook sd-button share-icon" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/?share=facebook&amp;nb=1" target="_blank" title="Click to share on Facebook"><span>Facebook<span class="share-count">158</span></span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-4882" class="share-twitter sd-button share-icon" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/?share=reddit&amp;nb=1" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-4882" class="share-linkedin sd-button share-icon" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/?share=linkedin&amp;nb=1" target="_blank" title="Click to share on LinkedIn"><span>LinkedIn<span class="share-count">132</span></span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-4882" class="share-google-plus-1 sd-button share-icon" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/?share=google-plus-1&amp;nb=1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-pinterest"><a rel="nofollow" data-shared="sharing-pinterest-4882" class="share-pinterest sd-button share-icon" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/?share=pinterest&amp;nb=1" target="_blank" title="Click to share on Pinterest"><span>Pinterest<span class="share-count">19</span></span></a></li><li class="share-tumblr"><a rel="nofollow" data-shared="" class="share-tumblr sd-button share-icon" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/?share=tumblr&amp;nb=1" target="_blank" title="Click to share on Tumblr"><span>Tumblr</span></a></li><li class="share-email share-service-visible"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/?share=email&amp;nb=1" target="_blank" title="Click to email this to a friend"><span>Email</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#print" target="_blank" title="Click to print"><span>Print</span></a></li><li class="share-end"></li></ul></div></div></div>
+<div id="author-meta">
+<img alt="" src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/bc264e8b1145c5291892c01cc9174db7" srcset="http://2.gravatar.com/avatar/bc264e8b1145c5291892c01cc9174db7?s=160&amp;r=pg 2x" class="avatar avatar-80 photo grav-hashed grav-hijack" height="80" width="80" originals="80" src-orig="http://2.gravatar.com/avatar/bc264e8b1145c5291892c01cc9174db7?s=80&amp;r=pg" scale="2" id="grav-bc264e8b1145c5291892c01cc9174db7-0"> <div class="about-author">About <a href="http://www.randalolson.com/author/rhiever/" title="Posts by Randy Olson" rel="author">Randy Olson</a></div>
+<p>Dr. Randy Olson is a Senior Data Scientist at the University of Pennsylvania, where he develops state-of-the-art machine learning algorithms with a focus on biomedical applications.</p>
+</div> 
+</div> 
+<div class="navigation">
+<div class="previous">‹ <a href="http://www.randalolson.com/2014/06/25/average-iq-of-students-by-college-major-and-gender-ratio/" rel="prev">Average IQ of students by college major and gender ratio</a></div>
+<div class="next"><a href="http://www.randalolson.com/2014/08/24/the-best-and-worst-times-to-have-your-case-reviewed-by-a-judge/" rel="next">The best and worst times to have your case reviewed by a judge</a> ›</div>
+</div> 
+<div class="post-data">
+Posted in <a href="http://www.randalolson.com/category/data-visualization/">data visualization</a>, <a href="http://www.randalolson.com/category/ipython/">ipython</a>, <a href="http://www.randalolson.com/category/python/">python</a>, <a href="http://www.randalolson.com/category/tutorial/">tutorial</a> Tagged with: <a href="http://www.randalolson.com/tag/graphic-design/" rel="tag">graphic design</a>, <a href="http://www.randalolson.com/tag/matplotlib/" rel="tag">matplotlib</a>, <a href="http://www.randalolson.com/tag/python/" rel="tag">python</a>, <a href="http://www.randalolson.com/tag/tutorial/" rel="tag">tutorial</a>, <a href="http://www.randalolson.com/tag/visualization/" rel="tag">visualization</a><br> </div> 
+<div class="post-edit"></div>
+</div> 
+<div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/saved_resource(2).html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 2069px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+</div> 
+<div id="widgets" class="grid col-300 fit">
+<div id="text-2" class="widget-wrapper widget_text"><div class="widget-title"><h3>About this blog</h3></div> <div class="textwidget"><p>This blog is my labor of love, and I've spent hundreds of hours working on the projects that you'll read about here. Generally, I write about data visualization and machine learning, and sometimes explore out-of-the-box projects at the intersection of the two. I hope you enjoy my projects as much as I have.</p>
+<p>If you would like to use one of my graphs on your website or in a publication, please feel free to do so with appropriate attribution, but I would appreciate it if you <a href="http://www.randalolson.com/contact/">email me</a> first to let me know.</p>
+</div>
+</div><div id="text-4" class="widget-wrapper widget_text"> <div class="textwidget"><center><a href="http://app.jobvite.com/CompanyJobs/Careers.aspx?nl=1&amp;k=Job&amp;j=odiK2fw1&amp;s=website" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-widget&#39;, &#39;http://app.jobvite.com/CompanyJobs/Careers.aspx?nl=1&amp;k=Job&amp;j=odiK2fw1&amp;s=website&#39;, &#39;&#39;]);"><img src="https://s3.amazonaws.com/sm-static-hosting/jobs-ad3.jpg" width="200" height="600" style="display: none !important;" scale="0"></a></center></div>
+</div> <div id="recent-posts-3" class="widget-wrapper widget_recent_entries"> <div class="widget-title"><h3>Recent Posts</h3></div> <ul>
+<li>
+<a href="http://www.randalolson.com/2016/09/03/republican-leaning-states-tend-to-have-more-traffic-deaths/">Republican-leaning states tend to have more traffic deaths</a>
+</li>
+<li>
+<a href="http://www.randalolson.com/2016/09/03/python-2-7-still-reigns-supreme-in-pip-installs/">Python 2.7 still reigns supreme in pip installs</a>
+</li>
+<li>
+<a href="http://www.randalolson.com/2016/08/13/evolution-of-active-categorical-image-classification-via-saccadic-eye-movement/">Evolution of active categorical image classification via saccadic eye movement</a>
+</li>
+<li>
+<a href="http://www.randalolson.com/2016/07/30/the-optimal-u-s-national-parks-centennial-road-trip/">The Optimal U.S. National Parks Centennial Road Trip</a>
+</li>
+<li>
+<a href="http://www.randalolson.com/2016/06/05/computing-optimal-road-trips-on-a-limited-budget/">Computing optimal road trips on a limited budget</a>
+</li>
+</ul>
+</div> <div id="search-4" class="widget-wrapper widget_search"><div class="widget-title"><h3>Search</h3></div><form method="get" id="searchform" action="http://www.randalolson.com/">
+<label class="screen-reader-text" for="s">Search for:</label>
+<input type="text" class="field" name="s" id="s" placeholder="search here …">
+<input type="submit" class="submit" name="submit" id="searchsubmit" value="Go">
+</form></div><div id="archives-2" class="widget-wrapper widget_archive"><div class="widget-title"><h3>Archives</h3></div> <label class="screen-reader-text" for="archives-dropdown-2">Archives</label>
+<select id="archives-dropdown-2" name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;">
+<option value="">Select Month</option>
+<option value="http://www.randalolson.com/2016/09/"> September 2016 &nbsp;(2)</option>
+<option value="http://www.randalolson.com/2016/08/"> August 2016 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2016/07/"> July 2016 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2016/06/"> June 2016 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2016/05/"> May 2016 &nbsp;(4)</option>
+<option value="http://www.randalolson.com/2016/04/"> April 2016 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2016/03/"> March 2016 &nbsp;(6)</option>
+<option value="http://www.randalolson.com/2016/02/"> February 2016 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2015/11/"> November 2015 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2015/09/"> September 2015 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2015/08/"> August 2015 &nbsp;(6)</option>
+<option value="http://www.randalolson.com/2015/07/"> July 2015 &nbsp;(2)</option>
+<option value="http://www.randalolson.com/2015/06/"> June 2015 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2015/04/"> April 2015 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2015/03/"> March 2015 &nbsp;(8)</option>
+<option value="http://www.randalolson.com/2015/02/"> February 2015 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2015/01/"> January 2015 &nbsp;(4)</option>
+<option value="http://www.randalolson.com/2014/12/"> December 2014 &nbsp;(6)</option>
+<option value="http://www.randalolson.com/2014/11/"> November 2014 &nbsp;(6)</option>
+<option value="http://www.randalolson.com/2014/10/"> October 2014 &nbsp;(7)</option>
+<option value="http://www.randalolson.com/2014/09/"> September 2014 &nbsp;(4)</option>
+<option value="http://www.randalolson.com/2014/08/"> August 2014 &nbsp;(3)</option>
+<option value="http://www.randalolson.com/2014/06/"> June 2014 &nbsp;(11)</option>
+<option value="http://www.randalolson.com/2014/05/"> May 2014 &nbsp;(12)</option>
+<option value="http://www.randalolson.com/2014/04/"> April 2014 &nbsp;(5)</option>
+<option value="http://www.randalolson.com/2014/03/"> March 2014 &nbsp;(5)</option>
+<option value="http://www.randalolson.com/2014/02/"> February 2014 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2014/01/"> January 2014 &nbsp;(7)</option>
+<option value="http://www.randalolson.com/2013/12/"> December 2013 &nbsp;(5)</option>
+<option value="http://www.randalolson.com/2013/11/"> November 2013 &nbsp;(6)</option>
+<option value="http://www.randalolson.com/2013/07/"> July 2013 &nbsp;(3)</option>
+<option value="http://www.randalolson.com/2013/06/"> June 2013 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2013/05/"> May 2013 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2013/04/"> April 2013 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2013/03/"> March 2013 &nbsp;(6)</option>
+<option value="http://www.randalolson.com/2013/02/"> February 2013 &nbsp;(1)</option>
+<option value="http://www.randalolson.com/2013/01/"> January 2013 &nbsp;(2)</option>
+<option value="http://www.randalolson.com/2012/08/"> August 2012 &nbsp;(3)</option>
+<option value="http://www.randalolson.com/2012/06/"> June 2012 &nbsp;(2)</option>
+<option value="http://www.randalolson.com/2012/05/"> May 2012 &nbsp;(2)</option>
+</select>
+</div><div id="tag_cloud-2" class="widget-wrapper widget_tag_cloud"><div class="widget-title"><h3>Common Topics</h3></div><div class="tagcloud"><a href="http://www.randalolson.com/tag/analysis/" class="tag-link-395 tag-link-position-1" title="3 topics" style="font-size: 8pt;">analysis</a>
+<a href="http://www.randalolson.com/tag/artificial-intelligence/" class="tag-link-22 tag-link-position-2" title="4 topics" style="font-size: 9.7948717948718pt;">artificial intelligence</a>
+<a href="http://www.randalolson.com/tag/baby-names/" class="tag-link-336 tag-link-position-3" title="4 topics" style="font-size: 9.7948717948718pt;">baby names</a>
+<a href="http://www.randalolson.com/tag/college-major/" class="tag-link-249 tag-link-position-4" title="4 topics" style="font-size: 9.7948717948718pt;">college major</a>
+<a href="http://www.randalolson.com/tag/data-visualization/" class="tag-link-396 tag-link-position-5" title="11 topics" style="font-size: 16.615384615385pt;">data visualization</a>
+<a href="http://www.randalolson.com/tag/dating/" class="tag-link-298 tag-link-position-6" title="4 topics" style="font-size: 9.7948717948718pt;">dating</a>
+<a href="http://www.randalolson.com/tag/deadly/" class="tag-link-120 tag-link-position-7" title="3 topics" style="font-size: 8pt;">deadly</a>
+<a href="http://www.randalolson.com/tag/decision-making/" class="tag-link-75 tag-link-position-8" title="3 topics" style="font-size: 8pt;">decision making</a>
+<a href="http://www.randalolson.com/tag/education/" class="tag-link-169 tag-link-position-9" title="5 topics" style="font-size: 11.230769230769pt;">education</a>
+<a href="http://www.randalolson.com/tag/evolution/" class="tag-link-40 tag-link-position-10" title="7 topics" style="font-size: 13.384615384615pt;">evolution</a>
+<a href="http://www.randalolson.com/tag/evolutionary-computation/" class="tag-link-81 tag-link-position-11" title="3 topics" style="font-size: 8pt;">evolutionary computation</a>
+<a href="http://www.randalolson.com/tag/film/" class="tag-link-119 tag-link-position-12" title="3 topics" style="font-size: 8pt;">film</a>
+<a href="http://www.randalolson.com/tag/films/" class="tag-link-117 tag-link-position-13" title="4 topics" style="font-size: 9.7948717948718pt;">films</a>
+<a href="http://www.randalolson.com/tag/front-page/" class="tag-link-54 tag-link-position-14" title="10 topics" style="font-size: 15.897435897436pt;">front page</a>
+<a href="http://www.randalolson.com/tag/genetic-algorithm/" class="tag-link-351 tag-link-position-15" title="7 topics" style="font-size: 13.384615384615pt;">genetic algorithm</a>
+<a href="http://www.randalolson.com/tag/hotness/" class="tag-link-197 tag-link-position-16" title="4 topics" style="font-size: 9.7948717948718pt;">hotness</a>
+<a href="http://www.randalolson.com/tag/ipython/" class="tag-link-387 tag-link-position-17" title="7 topics" style="font-size: 13.384615384615pt;">ipython</a>
+<a href="http://www.randalolson.com/tag/kill-counts/" class="tag-link-114 tag-link-position-18" title="6 topics" style="font-size: 12.487179487179pt;">kill counts</a>
+<a href="http://www.randalolson.com/tag/machine-learning/" class="tag-link-350 tag-link-position-19" title="13 topics" style="font-size: 17.871794871795pt;">machine learning</a>
+<a href="http://www.randalolson.com/tag/movies/" class="tag-link-116 tag-link-position-20" title="11 topics" style="font-size: 16.615384615385pt;">movies</a>
+<a href="http://www.randalolson.com/tag/notebook/" class="tag-link-8 tag-link-position-21" title="5 topics" style="font-size: 11.230769230769pt;">notebook</a>
+<a href="http://www.randalolson.com/tag/open-science/" class="tag-link-49 tag-link-position-22" title="4 topics" style="font-size: 9.7948717948718pt;">open science</a>
+<a href="http://www.randalolson.com/tag/optimization/" class="tag-link-353 tag-link-position-23" title="8 topics" style="font-size: 14.282051282051pt;">optimization</a>
+<a href="http://www.randalolson.com/tag/outreach/" class="tag-link-393 tag-link-position-24" title="3 topics" style="font-size: 8pt;">outreach</a>
+<a href="http://www.randalolson.com/tag/pandas/" class="tag-link-18 tag-link-position-25" title="4 topics" style="font-size: 9.7948717948718pt;">pandas</a>
+<a href="http://www.randalolson.com/tag/post-ranking/" class="tag-link-198 tag-link-position-26" title="4 topics" style="font-size: 9.7948717948718pt;">post ranking</a>
+<a href="http://www.randalolson.com/tag/python/" class="tag-link-391 tag-link-position-27" title="9 topics" style="font-size: 15.179487179487pt;">python</a>
+<a href="http://www.randalolson.com/tag/reddit/" class="tag-link-394 tag-link-position-28" title="23 topics" style="font-size: 22pt;">reddit</a>
+<a href="http://www.randalolson.com/tag/research/" class="tag-link-389 tag-link-position-29" title="5 topics" style="font-size: 11.230769230769pt;">research</a>
+<a href="http://www.randalolson.com/tag/road-trip/" class="tag-link-366 tag-link-position-30" title="6 topics" style="font-size: 12.487179487179pt;">road trip</a>
+<a href="http://www.randalolson.com/tag/science-outreach/" class="tag-link-101 tag-link-position-31" title="3 topics" style="font-size: 8pt;">science outreach</a>
+<a href="http://www.randalolson.com/tag/social-media/" class="tag-link-102 tag-link-position-32" title="3 topics" style="font-size: 8pt;">social media</a>
+<a href="http://www.randalolson.com/tag/statistics/" class="tag-link-388 tag-link-position-33" title="7 topics" style="font-size: 13.384615384615pt;">statistics</a>
+<a href="http://www.randalolson.com/tag/subreddit/" class="tag-link-52 tag-link-position-34" title="6 topics" style="font-size: 12.487179487179pt;">subreddit</a>
+<a href="http://www.randalolson.com/tag/top-posts/" class="tag-link-55 tag-link-position-35" title="4 topics" style="font-size: 9.7948717948718pt;">top posts</a>
+<a href="http://www.randalolson.com/tag/traveling-salesman-problem/" class="tag-link-352 tag-link-position-36" title="8 topics" style="font-size: 14.282051282051pt;">traveling salesman problem</a>
+<a href="http://www.randalolson.com/tag/tutorial/" class="tag-link-390 tag-link-position-37" title="4 topics" style="font-size: 9.7948717948718pt;">tutorial</a>
+<a href="http://www.randalolson.com/tag/twitter/" class="tag-link-33 tag-link-position-38" title="5 topics" style="font-size: 11.230769230769pt;">twitter</a>
+<a href="http://www.randalolson.com/tag/united-states/" class="tag-link-159 tag-link-position-39" title="4 topics" style="font-size: 9.7948717948718pt;">united states</a>
+<a href="http://www.randalolson.com/tag/upvotes/" class="tag-link-56 tag-link-position-40" title="3 topics" style="font-size: 8pt;">upvotes</a>
+<a href="http://www.randalolson.com/tag/usa/" class="tag-link-187 tag-link-position-41" title="12 topics" style="font-size: 17.153846153846pt;">usa</a>
+<a href="http://www.randalolson.com/tag/violence/" class="tag-link-121 tag-link-position-42" title="4 topics" style="font-size: 9.7948717948718pt;">violence</a>
+<a href="http://www.randalolson.com/tag/violent-films/" class="tag-link-113 tag-link-position-43" title="4 topics" style="font-size: 9.7948717948718pt;">violent films</a>
+<a href="http://www.randalolson.com/tag/virality/" class="tag-link-196 tag-link-position-44" title="4 topics" style="font-size: 9.7948717948718pt;">virality</a>
+<a href="http://www.randalolson.com/tag/visualization/" class="tag-link-142 tag-link-position-45" title="5 topics" style="font-size: 11.230769230769pt;">visualization</a></div>
+</div><div id="blog_subscription-2" class="widget-wrapper jetpack_subscription_widget"><div class="widget-title"><h3>Subscribe</h3></div>
+<form action="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#" method="post" accept-charset="utf-8" id="subscribe-blog-blog_subscription-2">
+<div id="subscribe-text"><p>Enter your email address to subscribe to this blog and receive notifications of new posts by email.</p>
+</div> <p id="subscribe-email">
+<label id="jetpack-subscribe-label" for="subscribe-field-blog_subscription-2" style="clip: rect(1px 1px 1px 1px); position: absolute; height: 1px; width: 1px; overflow: hidden;">
+Email Address </label>
+<input type="email" name="email" required="required" class="required" value="" id="subscribe-field-blog_subscription-2" placeholder="Email Address">
+</p>
+<p id="subscribe-submit">
+<input type="hidden" name="action" value="subscribe">
+<input type="hidden" name="source" value="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/">
+<input type="hidden" name="sub-type" value="widget">
+<input type="hidden" name="redirect_fragment" value="blog_subscription-2">
+<input type="submit" value="Subscribe" name="jetpack_subscriptions_widget">
+</p>
+</form>
+<script type="text/rocketscript" data-rocketoptimized="true">
+			/*
+			Custom functionality for safari and IE
+			 */
+			(function( d ) {
+				// In case the placeholder functionality is available we remove labels
+				if ( ( 'placeholder' in d.createElement( 'input' ) ) ) {
+					var label = d.querySelector( 'label[for=subscribe-field-blog_subscription-2]' );
+						label.style.clip 	 = 'rect(1px, 1px, 1px, 1px)';
+						label.style.position = 'absolute';
+						label.style.height   = '1px';
+						label.style.width    = '1px';
+						label.style.overflow = 'hidden';
+				}
+
+				// Make sure the email value is filled in before allowing submit
+				var form = d.getElementById('subscribe-blog-blog_subscription-2'),
+					input = d.getElementById('subscribe-field-blog_subscription-2'),
+					handler = function( event ) {
+						if ( '' === input.value ) {
+							input.focus();
+
+							if ( event.preventDefault ){
+								event.preventDefault();
+							}
+
+							return false;
+						}
+					};
+
+				if ( window.addEventListener ) {
+					form.addEventListener( 'submit', handler, false );
+				} else {
+					form.attachEvent( 'onsubmit', handler );
+				}
+			})( document );
+			</script>
+</div><div id="wpcom_social_media_icons_widget-2" class="widget-wrapper widget_wpcom_social_media_icons_widget"><div class="widget-title"><h3>Social</h3></div><ul><li><a title="View RandalSOlson’s profile on Facebook" href="https://www.facebook.com/RandalSOlson/" class="genericon genericon-facebook" target="_blank"><span class="screen-reader-text">View RandalSOlson’s profile on Facebook</span></a></li><li><a title="View randal_olson’s profile on Twitter" href="https://twitter.com/randal_olson/" class="genericon genericon-twitter" target="_blank"><span class="screen-reader-text">View randal_olson’s profile on Twitter</span></a></li><li><a title="View randalolson’s profile on LinkedIn" href="https://www.linkedin.com/in/randalolson/" class="genericon genericon-linkedin" target="_blank"><span class="screen-reader-text">View randalolson’s profile on LinkedIn</span></a></li><li><a title="View rhiever’s profile on GitHub" href="https://github.com/rhiever/" class="genericon genericon-github" target="_blank"><span class="screen-reader-text">View rhiever’s profile on GitHub</span></a></li><li><a title="View Rhiever’s profile on YouTube" href="https://www.youtube.com/user/Rhiever/" class="genericon genericon-youtube" target="_blank"><span class="screen-reader-text">View Rhiever’s profile on YouTube</span></a></li></ul></div><div id="rss_links-2" class="widget-wrapper widget_rss_links"><div class="widget-title"><h3>RSS Feeds</h3></div><ul><li><a target="_self" href="http://www.randalolson.com/feed/" title="Subscribe to Posts">RSS - Posts</a></li><li><a target="_self" href="http://www.randalolson.com/comments/feed/" title="Subscribe to Comments">RSS - Comments</a></li></ul>
+</div>
+</div> 
+</div> 
+</div> 
+<div id="footer" class="clearfix">
+<div id="footer-wrapper">
+<div class="grid col-940">
+<div class="grid col-540">
+</div> 
+<div class="grid col-380 fit">
+<ul class="social-icons"><li class="twitter-icon"><a href="https://twitter.com/randal_olson"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/twitter-icon.png" width="24" height="24" alt="Twitter" scale="0"></a></li><li class="facebook-icon"><a href="https://www.facebook.com/RandalSOlson"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/facebook-icon.png" width="24" height="24" alt="Facebook" scale="0"></a></li><li class="linkedin-icon"><a href="http://www.linkedin.com/in/randalolson"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/linkedin-icon.png" width="24" height="24" alt="LinkedIn" scale="0"></a></li><li class="youtube-icon"><a href="http://www.youtube.com/user/Rhiever"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/youtube-icon.png" width="24" height="24" alt="YouTube" scale="0"></a></li><li class="stumbleupon-icon"><a href="http://www.stumbleupon.com/stumbler/Rhiever"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/stumbleupon-icon.png" width="24" height="24" alt="StumbleUpon" scale="0"></a></li><li class="rss-icon"><a href="http://www.randalolson.com/feed/"><img src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/rss-icon.png" width="24" height="24" alt="RSS Feed" scale="0"></a></li></ul>  </div> 
+</div> 
+<div class="grid col-300 copyright">
+© 2016<a href="http://www.randalolson.com/" title="Dr. Randal S. Olson">
+Dr. Randal S. Olson </a>
+</div> 
+<div class="grid col-300 scroll-top"><a href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#scroll-top" title="scroll to top">↑</a></div>
+<div class="grid col-300 fit powered">
+<a href="http://cyberchimps.com/responsive-theme/" title="Responsive Theme">
+Responsive Theme</a>
+powered by <a href="http://wordpress.org/" title="WordPress">
+WordPress</a>
+</div> 
+</div> 
+</div> 
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shCore.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCSharp.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushPhp.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushJScript.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushJava.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushVb.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushSql.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushXml.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushDelphi.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushPython.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushRuby.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCss.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCpp.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script class="javascript" type="text/rocketscript" data-rocketoptimized="true">
+dp.SyntaxHighlighter.ClipboardSwf = 'http://www.randalolson.com/wp-content/plugins/google-syntax-highlighter/Scripts/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script><style>.dp-py .builtins { color: #ff1493; }.dp-py .magicmethods { color: #808080; }.dp-py .exceptions { color: brown; }.dp-py .types { color: brown; font-style: italic; }.dp-py .commonlibs { color: #8A2BE2; font-style: italic; }</style><style>.dp-py .builtins { color: #ff1493; }.dp-py .magicmethods { color: #808080; }.dp-py .exceptions { color: brown; }.dp-py .types { color: brown; font-style: italic; }.dp-py .commonlibs { color: #8A2BE2; font-style: italic; }</style><style>.dp-py .builtins { color: #ff1493; }.dp-py .magicmethods { color: #808080; }.dp-py .exceptions { color: brown; }.dp-py .types { color: brown; font-style: italic; }.dp-py .commonlibs { color: #8A2BE2; font-style: italic; }</style>
+<script type="text/rocketscript" data-rocketoptimized="true">
+var colomatduration = 'fast';
+var colomatslideEffect = 'slideFade';
+</script> <div style="display:none">
+<div class="grofile-hash-map-bc264e8b1145c5291892c01cc9174db7">
+</div>
+</div>
+<script type="text/rocketscript" data-rocketoptimized="true">
+		window.WPCOM_sharing_counts = {"http:\/\/www.randalolson.com\/2014\/06\/28\/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib\/":4882};
+	</script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+		var windowOpen;
+		jQuery(document.body).on('click', 'a.share-facebook', function() {
+			if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+				windowOpen.close();
+			}
+			windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+			return false;
+		});
+		</script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+		var windowOpen;
+		jQuery(document.body).on('click', 'a.share-twitter', function() {
+			if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+				windowOpen.close();
+			}
+			windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+			return false;
+		});
+		</script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+		var windowOpen;
+		jQuery(document.body).on('click', 'a.share-linkedin', function() {
+			if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+				windowOpen.close();
+			}
+			windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+			return false;
+		});
+		</script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+		var windowOpen;
+		jQuery(document.body).on('click', 'a.share-google-plus-1', function() {
+			if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+				windowOpen.close();
+			}
+			windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+			return false;
+		});
+		</script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+		var windowOpen;
+		jQuery(document.body).on('click', 'a.share-tumblr', function() {
+			if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+				windowOpen.close();
+			}
+			windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+			return false;
+		});
+		</script>
+
+<link rel="stylesheet" id="genericons-css" href="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/genericons.css" type="text/css" media="all">
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/www.randalolson.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}},"sending":"Sending ...","cached":"1"};
+/* ]]> */
+</script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.5" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketsrc="http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201642" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/jquery-collapse-o-matic/js/collapse.js?ver=1.6.5" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketsrc="http://s.gravatar.com/js/gprofiles.js?ver=2016Octaa" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.6.1" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-content/themes/responsive/core/js/responsive-scripts.min.js?ver=1.2.6" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-content/themes/responsive/core/js/jquery.placeholder.min.js?ver=2.0.7" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/jetpack/_inc/twitter-timeline.js?ver=4.0.0" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-includes/js/wp-embed.min.js?ver=4.6.1" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.6.1","language":""},"disqusIdentifier":"4882 http:\/\/www.randalolson.com\/?p=4882","disqusShortname":"randalolson","disqusTitle":"How to make beautiful data visualizations in Python with matplotlib","disqusUrl":"http:\/\/www.randalolson.com\/2014\/06\/28\/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib\/","options":{"manualSync":false},"postId":"4882"};
+/* ]]> */
+</script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/disqus-comment-system/media/js/disqus.js?ver=4.6.1" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"randalolson"};
+/* ]]> */
+</script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/disqus-comment-system/media/js/count.js?ver=4.6.1" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/rocketscript" data-rocketsrc="http://www.randalolson.com/wp-content/plugins/jetpack/modules/sharedaddy/sharing.js?ver=4.3.1" data-rocketoptimized="true"></script>
+
+
+ <iframe style="display: none;" src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/saved_resource(3).html"></iframe><div id="sharing_email" style="display: none;">
+<form action="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/" method="post">
+<label for="target_email">Send to Email Address</label>
+<input type="email" name="target_email" id="target_email" value="">
+<label for="source_name">Your Name</label>
+<input type="text" name="source_name" id="source_name" value="">
+<label for="source_email">Your Email Address</label>
+<input type="email" name="source_email" id="source_email" value="">
+<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off">
+<script type="text/rocketscript" data-rocketoptimized="true"> document.getElementById('jetpack-source_f_name').value = ''; </script>
+<img style="float: right; display: none" class="loading" src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/loading.gif" alt="loading" width="16" height="16" scale="0">
+<input type="submit" value="Send Email" class="sharing_send">
+<a rel="nofollow" href="http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/#cancel" class="sharing_cancel">Cancel</a>
+<div class="errors errors-1" style="display: none;">
+Post was not sent - check your email addresses! </div>
+<div class="errors errors-2" style="display: none;">
+Email check failed, please try again </div>
+<div class="errors errors-3" style="display: none;">
+Sorry, your blog cannot share posts by email. </div>
+</form>
+</div><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" src="./How to make beautiful data visualizations in Python with matplotlib _ Dr. Randal S. Olson_files/saved_resource(4).html"></iframe></body></html>
